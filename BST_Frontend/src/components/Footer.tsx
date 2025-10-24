@@ -6,10 +6,18 @@ export default function Footer() {
       <div className="footer-inner">
         <span>© {new Date().getFullYear()} Bhutan Smart Tourism</span>
         <nav className="footer-links">
-          <Link href="/about">About Us</Link>
-          <Link href="#">Privacy Policy</Link>
-          <Link href="#">Terms</Link>
-          <Link href="#">Contact</Link>
+          <Link className="hover:underline underline-offset-4" href="/about">
+            About Us
+          </Link>
+          <Link className="hover:underline underline-offset-4" href="#">
+            Privacy Policy
+          </Link>
+          <Link className="hover:underline underline-offset-4" href="#">
+            Terms
+          </Link>
+          <Link className="hover:underline underline-offset-4" href="#">
+            Contact
+          </Link>
         </nav>
       </div>
     </footer>
