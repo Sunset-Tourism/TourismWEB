@@ -378,12 +378,28 @@ h6,
   border-radius: 0.5rem;
 }
 
+/* ---------- COLOR VARIABLES ---------- */
+:root {
+  /* Palette */
+  --color-primary: #2b6777;
+  --color-accent: #52ab98;
+  --color-bg: #ffffff; /* main background */
+  --color-bg-secondary: #f2f2f2; /* secondary background */
+  --color-fg: #2b6777; /* primary text color */
+  --color-fg-soft: #c8d8e4; /* soft foreground tint */
+  --color-border: #e5e7eb; /* neutral border */
+
+  --max-width: 1100px;
+  /* Shared heights */
+  --bar-height: 56px; /* topbar + sidebar brand */
+}
+
 /* ---------- GLOBAL STYLES ---------- */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #fafafa;
-  color: #222;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
 }
 
 /* ---------- HOMEPAGE ---------- */
@@ -395,17 +411,22 @@ body {
 .hero {
   text-align: center;
   padding: 80px 20px;
-  background: linear-gradient(to bottom, #fff, #f4f4f4);
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg),
+    var(--color-bg-secondary)
+  );
 }
 
 .hero h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
+  color: var(--color-primary);
 }
 
 .hero p {
   font-size: 1.2rem;
-  color: #555;
+  color: var(--color-fg-soft);
 }
 
 .hero-buttons {
@@ -422,7 +443,7 @@ body {
   align-items: center;
   gap: 8px;
   padding: 12px 18px;
-  background-color: #007bff;
+  background-color: var(--color-primary);
   border: none;
   border-radius: 8px;
   color: #fff;
@@ -433,12 +454,12 @@ body {
 
 .action-button.outline {
   background: transparent;
-  color: #007bff;
-  border: 2px solid #007bff;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .action-button:hover {
-  background-color: #0056b3;
+  background-color: var(--color-accent);
 }
 
 /* ---------- FEATURES ---------- */
@@ -448,7 +469,7 @@ body {
   gap: 24px;
   justify-content: center;
   padding: 60px 20px;
-  background-color: #f9f9f9;
+  background-color: var(--color-bg-secondary);
 }
 
 .feature-section {
@@ -456,28 +477,32 @@ body {
   text-align: center;
   padding: 20px;
   border-radius: 12px;
-  background: #fff;
+  background: var(--color-bg);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .feature-section:hover {
   transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(43, 103, 119, 0.15);
 }
 
 .feature-icon {
   font-size: 2rem;
+  color: var(--color-accent);
   margin-bottom: 10px;
 }
 
 /* ---------- DESTINATIONS ---------- */
 .destinations {
   padding: 60px 20px;
+  background-color: var(--color-bg);
 }
 
 .destinations h2 {
   text-align: center;
   margin-bottom: 30px;
+  color: var(--color-primary);
 }
 
 .destination-grid {
@@ -487,50 +512,59 @@ body {
 }
 
 .destination-card {
-  background: #fff;
+  background: var(--color-bg);
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.destination-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(43, 103, 119, 0.15);
 }
 
 .destination-card h3 {
   margin: 0 0 8px;
+  color: var(--color-primary);
 }
 
 .destination-card .location {
   font-weight: bold;
-  color: #666;
+  color: var(--color-accent);
   margin-bottom: 8px;
 }
 
 .explore-btn {
   margin-top: 10px;
-  background-color: #007bff;
+  background-color: var(--color-primary);
   border: none;
   color: #fff;
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .explore-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--color-accent);
 }
 
 /* ---------- MAP SECTION ---------- */
 .map-section {
   text-align: center;
   padding: 60px 20px;
-  background-color: #e9f3ff;
+  background-color: var(--color-fg-soft);
 }
 
 .interactive-map {
   height: 400px;
-  background-color: #d8e9ff;
+  background-color: var(--color-accent);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
+  color: var(--color-bg);
+  font-weight: bold;
 }
-
-
