@@ -701,24 +701,99 @@ p {
 }
 
 /* ==============================
-   MAP SECTION
+   MAP SECTION (Enhanced)
    ============================== */
 .map-section {
   text-align: center;
-  padding: 80px 20px;
-  background-color: var(--color-fg-soft);
+  padding: 100px 20px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg-secondary),
+    var(--color-fg-soft)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.map-section h2 {
+  font-size: 2rem;
+  color: var(--color-primary);
+  margin-bottom: 24px;
 }
 
 .interactive-map {
-  height: 400px;
-  background-color: var(--color-accent);
+  position: relative;
+  height: 450px;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(
+      rgba(43, 103, 119, 0.25),
+      rgba(82, 171, 152, 0.25)
+    ),
+    url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Bhutan_location_map.svg/1024px-Bhutan_location_map.svg.png")
+      center/cover no-repeat;
+  box-shadow: var(--shadow-md);
+  transform: scale(1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.interactive-map:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 28px rgba(43, 103, 119, 0.25);
+}
+
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 103, 119, 0.25);
+  backdrop-filter: blur(6px);
+  color: #fff;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-lg);
-  color: var(--color-bg);
-  font-weight: 700;
-  box-shadow: var(--shadow-sm);
+  transition: background 0.3s ease;
+}
+
+.map-overlay:hover {
+  background: rgba(43, 103, 119, 0.35);
+}
+
+.map-overlay h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.map-overlay p {
+  max-width: 500px;
+  font-size: 1rem;
+  color: #f0f0f0;
+}
+
+.map-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.map-btn {
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+  background-color: var(--color-accent);
+  transform: translateY(-3px);
 }
 
 /* ==============================
@@ -761,6 +836,18 @@ p {
 
   .destination-card {
     padding: 20px;
+  }
+
+  .map-section {
+    padding: 60px 15px;
+  }
+
+  .interactive-map {
+    height: 350px;
+  }
+
+  .map-overlay h3 {
+    font-size: 1.2rem;
   }
 }
 
