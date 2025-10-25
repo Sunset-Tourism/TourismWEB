@@ -1,3 +1,423 @@
+.home-exp-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.82;
+  z-index: 1;
+}
+.home-exp-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 0.7em 0.5em 0.6em 0.5em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.32);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.55) 80%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  border-radius: 0 0 1rem 1rem;
+  display: block;
+  text-align: center;
+}
+/* Themed Info Cards (Costa Rica style) */
+.themed-info-section {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  margin: 4rem 0 2.5rem 0;
+}
+.themed-info-card {
+  background: var(--color-bg-secondary);
+  border-radius: 2rem;
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 16px rgba(43, 103, 119, 0.08);
+  border: 2px solid transparent;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.themed-info-card:hover {
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 6px 24px rgba(82, 171, 152, 0.18);
+}
+.themed-info-img {
+  width: 260px;
+  height: 260px;
+  border-radius: 1.5rem;
+  object-fit: cover;
+  margin-bottom: 2rem;
+}
+.themed-info-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  text-transform: lowercase;
+}
+.themed-info-title svg {
+  width: 1.2em;
+  height: 1.2em;
+  stroke: var(--color-primary);
+}
+.themed-info-desc {
+  font-size: 1.05rem;
+  color: #2b6777;
+  opacity: 0.95;
+  text-align: left;
+}
+@media (max-width: 1100px) {
+  .themed-info-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .themed-info-card {
+    width: 95vw;
+    max-width: 400px;
+  }
+}
+/* Hotel Card Button: Consistent with Bhutan color scheme */
+.hotel-btn {
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  padding: 0.6rem 1.6rem;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(82, 171, 152, 0.08);
+  border: none;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.hotel-btn:hover {
+  background: #3c9282;
+  color: #fff;
+}
+/* HomeHero: Large, bold, centered text over image, with strong text-shadow for clarity */
+.home-hero-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  text-align: center;
+  line-height: 1.1;
+  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.65), 0 1.5px 2px rgba(0, 0, 0, 0.22);
+  position: relative;
+  z-index: 2;
+}
+
+.home-hero-subtitle {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(0, 0, 0, 0.18);
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .home-hero-title {
+    font-size: 2.5rem;
+  }
+  .home-hero-subtitle {
+    font-size: 1.2rem;
+  }
+}
+/* =====================
+   Homepage Styles
+   ===================== */
+
+.home-hero {
+  position: relative;
+  color: #fff;
+  padding: 5rem 1.5rem 4rem 1.5rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 24px rgba(43, 103, 119, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+}
+
+.home-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.72) 60%,
+      rgba(0, 0, 0, 0.56) 100%
+    ),
+    url("/Punakha.png") center center/cover no-repeat;
+  border-radius: 1.5rem;
+  pointer-events: none;
+  opacity: 92%;
+}
+
+.home-hero-btn {
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(82, 171, 152, 0.08);
+}
+.home-hero-btn:hover {
+  background: #3c9282;
+}
+
+.home-section-title {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.home-featured {
+  background: var(--color-bg-secondary);
+  border-radius: 1.25rem;
+  padding: 2.5rem 1rem 2rem 1rem;
+  margin-bottom: 2.5rem;
+}
+.home-featured-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+}
+.home-card-featured {
+  min-width: 280px;
+  max-width: 340px;
+  background: #fff;
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 12px rgba(43, 103, 119, 0.09);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.home-card-featured:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(43, 103, 119, 0.13);
+}
+
+.home-experience {
+  margin: 3rem 0 2.5rem 0;
+}
+.home-experience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 260px 180px;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.home-exp.festivals {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+.home-exp.food {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+}
+.home-exp.animal {
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
+}
+.home-exp.auspicious {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+.home-exp.adventure {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+.home-exp.dzongs {
+  grid-column: 3 / 5;
+  grid-row: 2 / 3;
+}
+.home-exp {
+  background: var(--color-bg-secondary);
+  border-radius: 1.25rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  box-shadow: 0 4px 16px rgba(43, 103, 119, 0.08);
+  min-width: 0;
+  min-height: 220px;
+  height: 100%;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.home-exp:hover {
+  box-shadow: 0 32px 48px 0 rgba(0, 0, 0, 0.32) !important;
+}
+.home-exp.festivals {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+.home-exp.food {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+}
+.home-exp.animal {
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
+}
+.home-exp.auspicious {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+.home-exp.adventure {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+.home-exp.dzongs {
+  grid-column: 3 / 5;
+  grid-row: 2 / 3;
+}
+
+.home-hotels {
+  margin: 5rem 0 2.5rem 0; /* Increased top margin for more spacing */
+}
+.home-hotels-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 2.5rem;
+  justify-content: flex-start;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+.home-card-hotel {
+  min-width: 220px;
+  max-width: 260px;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(82, 171, 152, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.home-card-hotel:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(82, 171, 152, 0.13);
+}
+
+.home-themed-info {
+  margin: 2.5rem 0 2.5rem 0;
+}
+.home-themed-info-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+.home-theme-card {
+  min-width: 220px;
+  max-width: 340px;
+  background: var(--color-bg-secondary);
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(43, 103, 119, 0.04);
+  padding-bottom: 1.5rem;
+}
+.home-theme-link {
+  color: var(--color-accent);
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  display: inline-block;
+  transition: color 0.2s;
+}
+.home-theme-link:hover {
+  color: #3c9282;
+  text-decoration: underline;
+}
+
+.home-cta {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 60%,
+    var(--color-accent) 100%
+  );
+  color: #fff;
+  border-radius: 1.5rem;
+  padding: 2.5rem 1.5rem 2.5rem 1.5rem;
+  text-align: center;
+  margin: 3rem 0 0 0;
+  box-shadow: 0 4px 24px rgba(43, 103, 119, 0.08);
+}
+.home-cta-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.home-cta-desc {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  margin-bottom: 2rem;
+}
+.home-cta-btn {
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(82, 171, 152, 0.08);
+}
+.home-cta-btn:hover {
+  background: #3c9282;
+}
+
+@media (max-width: 900px) {
+  .home-experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 100px);
+  }
+}
+
+@media (max-width: 600px) {
+  .home-hero-title {
+    font-size: 1.5rem;
+  }
+  .home-section-title {
+    font-size: 1.1rem;
+  }
+  .home-featured-grid,
+  .home-hotels-grid,
+  .home-themed-info-grid {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .home-experience-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 80px);
+  }
+}
+
 @import "tailwindcss";
 
 @import "./variables.css";
