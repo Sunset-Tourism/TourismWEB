@@ -7,6 +7,7 @@ import { DestinationCard } from "./components/destinationcard";
 import { ActionButton } from "./components/actionbutton";
 import { MapPin, Calendar, Bus, Compass } from "lucide-react";
 import "../../styles/globals.css";
+import { motion } from "framer-motion";
 
 export default function HomePage() {
   const popularDestinations = [
@@ -31,22 +32,43 @@ export default function HomePage() {
     <div className="homepage">
       {/* Hero Section */}
       <section className="hero">
-        <h1>Explore Bhutan Interactively</h1>
-        <p>
-          Real-time information on attractions, festivals, and transportation
-        </p>
+        <motion.h1
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          Explore Bhutan Interactively
+        </motion.h1>
 
-        <div className="hero-buttons">
+        <motion.p
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        >
+          Real-time information on attractions, festivals, and transportation
+        </motion.p>
+
+        <motion.div
+          className="hero-buttons"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
           <ActionButton icon={<Compass />} text="Explore Attractions" />
           <ActionButton icon={<Calendar />} text="View Festivals" outline />
           <ActionButton icon={<Bus />} text="Transportation" outline />
-        </div>
+        </motion.div>
       </section>
 
       {/* Interactive Map Section */}
-      <section className="map-section">
+      <motion.section
+        className="map-section"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
         <InteractiveMap />
-      </section>
+      </motion.section>
 
       {/* Features Section */}
       <section className="features">
@@ -69,18 +91,29 @@ export default function HomePage() {
 
       {/* Popular Destinations Section */}
       <section className="destinations">
-        <h2>Popular Destinations</h2>
+        <motion.h2
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          Popular Destinations
+        </motion.h2>
+
         <div className="destination-grid">
           {popularDestinations.map((destination, index) => (
-            <DestinationCard
+            <motion.div
               key={index}
-              title={destination.title}
-              location={destination.location}
-              description={destination.description}
-              onExplore={() =>
-                console.log(`Exploring ${destination.title}`)
-              }
-            />
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+            >
+              <DestinationCard
+                title={destination.title}
+                location={destination.location}
+                description={destination.description}
+                onExplore={() => alert(`Exploring ${destination.title}`)}
+              />
+            </motion.div>
           ))}
         </div>
       </section>
