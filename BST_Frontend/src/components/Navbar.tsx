@@ -8,8 +8,11 @@ import {
   CalendarDays,
   BookOpenText,
   MessageSquare,
+  Settings as SettingsIcon,
+  LogOut,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+// cn no longer used after NavLink refactor
+import NavLink from "@/components/ui/nav-link";
 
 type NavItem = {
   href: string;
@@ -41,43 +44,26 @@ export default function Navbar() {
           const active = pathname === item.href;
           return (
             <li key={item.href} className={active ? "active" : undefined}>
-              <Link
-                href={item.href}
-                className={cn(
-                  "sidebar-link",
-                  "hover:bg-accent hover:text-accent-foreground",
-                  active && "bg-accent/30 text-primary shadow-inner"
-                )}
-              >
-                <span
-                  className={cn(
-                    "icon-box",
-                    active && "bg-accent/40 text-primary"
-                  )}
-                  aria-hidden
-                >
-                  <item.icon className="h-4 w-4" />
-                </span>
-                <span className="link-text">{item.label}</span>
-              </Link>
+              <NavLink href={item.href} icon={item.icon} active={active}>
+                {item.label}
+              </NavLink>
             </li>
           );
         })}
       </ul>
       <div className="sidebar-footer">
-        <Link
-          href="#"
-          className={cn(
-            "sidebar-link logout-link",
-            "hover:bg-accent hover:text-accent-foreground"
-          )}
-          aria-label="Logout"
+        <NavLink
+          href="/settings"
+          icon={SettingsIcon}
+          aria-label="Settings"
+          active={pathname === "/settings"}
         >
-          <span className="icon-box" aria-hidden>
-            <span className="icon">↳</span>
-          </span>
-          <span className="link-text">Logout</span>
-        </Link>
+          Settings
+        </NavLink>
+
+        <NavLink href="#" icon={LogOut} aria-label="Logout" active={false}>
+          Logout
+        </NavLink>
       </div>
     </nav>
   );
