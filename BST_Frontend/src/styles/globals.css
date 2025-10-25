@@ -473,78 +473,126 @@ h6,
   border-radius: 0.5rem;
 }
 
-/* ---------- COLOR VARIABLES ---------- */
+/* ==============================
+   GLOBAL THEME VARIABLES
+   ============================== */
 :root {
-  /* Palette */
+  /* ----- PALETTE ----- */
   --color-primary: #2b6777;
   --color-accent: #52ab98;
-  --color-bg: #ffffff; /* main background */
-  --color-bg-secondary: #f2f2f2; /* secondary background */
-  --color-fg: #2b6777; /* primary text color */
-  --color-fg-soft: #c8d8e4; /* soft foreground tint */
-  --color-border: #e5e7eb; /* neutral border */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f2f2f2;
+  --color-fg: #2b6777;
+  --color-fg-soft: #7da0a9;
+  --color-border: #e5e7eb;
 
+  /* ----- SHADOWS & RADIUS ----- */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 0 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 10px rgba(43, 103, 119, 0.15);
+
+  /* ----- LAYOUT ----- */
   --max-width: 1100px;
-  /* Shared heights */
-  --bar-height: 56px; /* topbar + sidebar brand */
+  --bar-height: 56px;
 }
 
-/* ---------- GLOBAL STYLES ---------- */
-body {
+/* ==============================
+   BASE STYLES
+   ============================== */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", Arial, sans-serif;
   background-color: var(--color-bg);
   color: var(--color-fg);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* ---------- HOMEPAGE ---------- */
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+p {
+  color: var(--color-fg-soft);
+}
+
+/* Container utility */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==============================
+   HOMEPAGE STRUCTURE
+   ============================== */
 .homepage {
   width: 100%;
 }
 
-/* ---------- HERO SECTION ---------- */
+/* ==============================
+   HERO SECTION
+   ============================== */
 .hero {
   text-align: center;
-  padding: 80px 20px;
+  padding: 100px 20px;
   background: linear-gradient(
     to bottom,
     var(--color-bg),
     var(--color-bg-secondary)
   );
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 .hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  color: var(--color-primary);
+  font-size: 2.8rem;
+  margin-bottom: 16px;
 }
 
 .hero p {
   font-size: 1.2rem;
   color: var(--color-fg-soft);
+  margin-bottom: 20px;
 }
 
 .hero-buttons {
-  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
 }
 
-/* ---------- ACTION BUTTON ---------- */
+/* ==============================
+   ACTION BUTTONS
+   ============================== */
 .action-button {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 12px 18px;
+  padding: 12px 20px;
   background-color: var(--color-primary);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: #fff;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.25s ease;
+}
+
+.action-button:hover {
+  background-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .action-button.outline {
@@ -553,103 +601,111 @@ body {
   border: 2px solid var(--color-primary);
 }
 
-.action-button:hover {
-  background-color: var(--color-accent);
+.action-button.outline:hover {
+  background-color: var(--color-primary);
+  color: #fff;
 }
 
-/* ---------- FEATURES ---------- */
+/* ==============================
+   FEATURE SECTION
+   ============================== */
 .features {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
   justify-content: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
   background-color: var(--color-bg-secondary);
 }
 
 .feature-section {
-  flex: 1 1 250px;
+  flex: 1 1 260px;
   text-align: center;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 24px;
+  border-radius: var(--radius-lg);
   background: var(--color-bg);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .feature-section:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(43, 103, 119, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .feature-icon {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: var(--color-accent);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-/* ---------- DESTINATIONS ---------- */
+/* ==============================
+   DESTINATIONS
+   ============================== */
 .destinations {
-  padding: 60px 20px;
+  padding: 80px 20px;
   background-color: var(--color-bg);
 }
 
 .destinations h2 {
   text-align: center;
-  margin-bottom: 30px;
+  font-size: 2rem;
+  margin-bottom: 40px;
   color: var(--color-primary);
 }
 
 .destination-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  gap: 28px;
 }
 
 .destination-card {
   background: var(--color-bg);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-border);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .destination-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(43, 103, 119, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .destination-card h3 {
-  margin: 0 0 8px;
-  color: var(--color-primary);
-}
-
-.destination-card .location {
-  font-weight: bold;
-  color: var(--color-accent);
   margin-bottom: 8px;
 }
 
+.destination-card .location {
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: 10px;
+}
+
 .explore-btn {
-  margin-top: 10px;
+  margin-top: 12px;
   background-color: var(--color-primary);
   border: none;
   color: #fff;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .explore-btn:hover {
   background-color: var(--color-accent);
+  transform: translateY(-2px);
 }
 
-/* ---------- MAP SECTION ---------- */
+/* ==============================
+   MAP SECTION
+   ============================== */
 .map-section {
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
   background-color: var(--color-fg-soft);
 }
 
@@ -659,7 +715,66 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   color: var(--color-bg);
-  font-weight: bold;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==============================
+   ANIMATIONS
+   ============================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+   ============================== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .features {
+    padding: 60px 10px;
+  }
+
+  .feature-section {
+    padding: 18px;
+  }
+
+  .destinations {
+    padding: 60px 10px;
+  }
+
+  .destination-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 60px 10px;
+  }
+
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .destination-grid {
+    grid-template-columns: 1fr;
+  }
 }
