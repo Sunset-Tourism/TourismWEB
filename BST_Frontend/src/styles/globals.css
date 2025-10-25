@@ -464,3 +464,160 @@ h6,
   text-align: center;
   border-radius: 0.5rem;
 }
+
+/* ---------- GLOBAL STYLES ---------- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  color: #222;
+}
+
+/* ---------- HOMEPAGE ---------- */
+.homepage {
+  width: 100%;
+}
+
+/* ---------- HERO SECTION ---------- */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(to bottom, #fff, #f4f4f4);
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.hero-buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ---------- ACTION BUTTON ---------- */
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.action-button.outline {
+  background: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+/* ---------- FEATURES ---------- */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+}
+
+.feature-section {
+  flex: 1 1 250px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.feature-section:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* ---------- DESTINATIONS ---------- */
+.destinations {
+  padding: 60px 20px;
+}
+
+.destinations h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.destination-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.destination-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.destination-card h3 {
+  margin: 0 0 8px;
+}
+
+.destination-card .location {
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.explore-btn {
+  margin-top: 10px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.explore-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ---------- MAP SECTION ---------- */
+.map-section {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #e9f3ff;
+}
+
+.interactive-map {
+  height: 400px;
+  background-color: #d8e9ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+
