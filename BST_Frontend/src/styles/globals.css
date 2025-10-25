@@ -135,24 +135,29 @@ h6,
 
 /* App layout */
 .app-layout {
-  display: grid;
-  grid-template-columns: 208px 1fr; /* was 260px */
+  display: block; /* use fixed rails + content offset */
   min-height: 100vh;
 }
 .sidebar {
   border-right: 1px solid var(--color-border);
   background: var(--color-bg);
   color: var(--color-fg);
-  position: sticky; /* keep pinned while page scrolls */
+  position: fixed; /* fixed for all pages */
+  left: 0;
   top: 0;
+  bottom: 0;
+  width: var(--sidebar-w, 208px);
   height: 100vh; /* ensure full viewport height regardless of page content */
   overflow: hidden; /* we'll scroll the links section only */
+  z-index: 20;
 }
 .app-main {
   display: grid;
   grid-template-rows: auto 1fr auto;
   background: var(--color-bg); /* match navbar/sidebar */
   color: var(--color-fg); /* dark text on light background */
+  margin-left: var(--sidebar-w, 208px); /* offset fixed sidebar */
+  padding-top: var(--bar-height); /* offset fixed topbar */
 }
 
 /* Sidebar */
@@ -270,8 +275,11 @@ h6,
   justify-content: space-between;
   padding: 0 1.25rem; /* horizontal only */
   border-bottom: 0; /* remove bottom divider line */
-  position: sticky;
+  position: fixed; /* fixed for all pages */
   top: 0;
+  left: var(--sidebar-w, 208px);
+  right: 0;
+  z-index: 30;
   background: var(--color-bg); /* match sidebar */
   min-height: var(--bar-height);
 }
@@ -371,15 +379,15 @@ h6,
    ===================== */
 /* Large tablets/smaller desktops */
 @media (max-width: 1024px) {
-  .app-layout {
-    grid-template-columns: 180px 1fr;
+  :root {
+    --sidebar-w: 180px;
   }
 }
 
 /* Tablets and below */
 @media (max-width: 768px) {
-  .app-layout {
-    grid-template-columns: 64px 1fr; /* compact sidebar */
+  :root {
+    --sidebar-w: 64px; /* compact sidebar */
   }
 
   /* Sidebar compaction */
