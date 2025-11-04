@@ -7,6 +7,7 @@ import { DestinationCard } from "./components/destinationcard";
 import { ActionButton } from "./components/actionbutton";
 import { MapPin, Calendar, Bus, Compass } from "lucide-react";
 import "../../styles/globals.css";
+import "./components/leaflet-setup.css";
 import { motion } from "framer-motion";
 
 export default function HomePage() {
