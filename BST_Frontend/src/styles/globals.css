@@ -658,11 +658,8 @@ h6,
   background: var(--color-fg-soft);
   color: var(--color-primary);
 }
-/* Make icon react to hover for a cohesive button look */
-.sidebar-link:hover .icon-box {
-  background: var(--color-fg-soft);
-  color: var(--color-primary);
-}
+/* Keep hover unified at the link level; icon inherits color via currentColor */
+/* Removed icon-specific hover styles to avoid double effect */
 
 /* Keyboard accessibility */
 .sidebar-link:focus-visible {

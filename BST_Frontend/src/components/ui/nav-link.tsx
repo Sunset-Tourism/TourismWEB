@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 export type IconType = React.ComponentType<{ className?: string }>;
 
 const navLinkVariants = cva(
-  // Base matches sidebar-link styling and hover behavior
-  "sidebar-link hover:bg-accent hover:text-accent-foreground",
+  // Base matches sidebar-link styling; hover handled in global CSS for consistency
+  "sidebar-link",
   {
     variants: {
       active: {

@@ -17,9 +17,9 @@ export default function ThemedInfoSection() {
           adventure <ArrowRight strokeWidth={2.2} />
         </div>
         <div className="themed-info-desc">
-          Discover thrilling adventures in Bhutan's breathtaking landscapes,
-          from high mountain treks to white-water rafting. Experience the spirit
-          of adventure in a land of natural wonders.
+          Discover thrilling adventures in Bhutan&apos;s breathtaking
+          landscapes, from high mountain treks to white-water rafting.
+          Experience the spirit of adventure in a land of natural wonders.
         </div>
       </div>
       <div className="themed-info-card culture">
@@ -35,9 +35,9 @@ export default function ThemedInfoSection() {
           culture <ArrowRight strokeWidth={2.2} />
         </div>
         <div className="themed-info-desc">
-          Immerse yourself in Bhutan's vibrant culture, where ancient traditions
-          blend with daily life. Festivals, music, and art create a unique and
-          welcoming atmosphere for all visitors.
+          Immerse yourself in Bhutan&apos;s vibrant culture, where ancient
+          traditions blend with daily life. Festivals, music, and art create a
+          unique and welcoming atmosphere for all visitors.
         </div>
       </div>
       <div className="themed-info-card sustainability">

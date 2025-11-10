@@ -4,15 +4,7 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
-import { Bell, Search, LogOut, Settings, User } from "lucide-react";
+import { Bell, Search, User } from "lucide-react";
 
 const TITLES: Record<string, string> = {
   "/": "Homepage",
@@ -54,41 +46,13 @@ export default function Topbar() {
         >
           <Bell className="h-4 w-4" />
         </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Avatar className="h-9 w-9 cursor-pointer border-2 border-input focus-visible:ring-1 focus-visible:ring-offset-0 ring-offset-0 hover:ring-1">
-              <AvatarFallback className="bg-muted">
-                <User className="h-4 w-4 text-muted-foreground" />
-              </AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link href="/profile" className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                <span>Profile</span>
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/settings" className="flex items-center gap-2">
-                <Settings className="h-4 w-4" />
-                <span>Settings</span>
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link
-                href="#"
-                className="flex items-center gap-2 text-destructive"
-              >
-                <LogOut className="h-4 w-4" />
-                <span>Logout</span>
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Link href="/profile" aria-label="Profile">
+          <Avatar className="h-9 w-9 cursor-pointer border-2 border-input focus-visible:ring-1 focus-visible:ring-offset-0 ring-offset-0 hover:ring-1">
+            <AvatarFallback className="bg-muted">
+              <User className="h-4 w-4 text-muted-foreground" />
+            </AvatarFallback>
+          </Avatar>
+        </Link>
       </div>
     </header>
   );
