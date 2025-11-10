@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+export const dynamic = "force-dynamic";
 import { InteractiveMap } from "./components/interactivemap";
 import { FeatureSection } from "./components/featuresection";
 import { DestinationCard } from "./components/destinationcard";
