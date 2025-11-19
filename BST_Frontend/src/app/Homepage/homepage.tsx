@@ -1,24 +1,19 @@
-import Image from "next/image";
+import HomeHero from "./component/HomeHero";
+import FeaturedDestinations from "./component/FeaturedDestinations";
+import ExperienceGrid from "./component/ExperienceGrid";
+import RecommendedHotels from "./component/RecommendedHotels";
+import ThemedInfoSection from "./component/ThemedInfoSection";
+import HomeCta from "./component/HomeCta";
 
 export default function Home() {
   return (
-    <section className="hero">
-      <div className="hero-content">
-        <h1>Discover the Soul of Bhutan</h1>
-        <p>
-          Plan, explore, and book your journey with smart tools and local
-          insights.
-        </p>
-      </div>
-      <div className="hero-media">
-        <Image
-          src="/images/map.svg"
-          alt="Bhutan map"
-          width={1200}
-          height={600}
-          priority
-        />
-      </div>
-    </section>
+    <main className="homepage">
+      <HomeHero />
+      <FeaturedDestinations />
+      <ExperienceGrid />
+      <RecommendedHotels />
+      <ThemedInfoSection />
+      <HomeCta />
+    </main>
   );
 }

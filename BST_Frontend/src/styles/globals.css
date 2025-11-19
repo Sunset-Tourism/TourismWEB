@@ -656,6 +656,32 @@
   animation: fadeInUp 0.6s ease-out;
 }
 
+@media (max-width: 900px) {
+  .home-experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 100px);
+  }
+}
+
+@media (max-width: 600px) {
+  .home-hero-title {
+    font-size: 1.5rem;
+  }
+  .home-section-title {
+    font-size: 1.1rem;
+  }
+  .home-featured-grid,
+  .home-hotels-grid,
+  .home-themed-info-grid {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .home-experience-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 80px);
+  }
+}
+
 @import "tailwindcss";
 
 @import "./variables.css";
@@ -1643,6 +1669,8 @@ p {
   animation: ripple-animation 0.6s ease-out;
   pointer-events: none;
 }
+/* Keep hover unified at the link level; icon inherits color via currentColor */
+/* Removed icon-specific hover styles to avoid double effect */
 
 @keyframes ripple-animation {
   to {
@@ -1919,6 +1947,119 @@ p {
   color: var(--color-primary);
   line-height: 1;
 }
+/* Stories Card Styles */
+.stories-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(43, 103, 119, 0.04);
+  padding: 1.5rem 1.25rem 1.25rem 1.25rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+.stories-card:hover {
+  box-shadow: 0 4px 16px rgba(82, 171, 152, 0.12);
+  border-color: var(--color-accent);
+}
+.stories-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.stories-card__category {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  margin-bottom: 0.25rem;
+  width: fit-content;
+}
+.stories-card__category--history {
+  background: var(--color-primary);
+}
+.stories-card__category--culture {
+  background: var(--color-accent);
+}
+.stories-card__category--lifestyle {
+  background: #c8d8e4;
+  color: var(--color-primary);
+}
+.stories-card__category--traditions {
+  background: #e5e7eb;
+  color: var(--color-primary);
+}
+.stories-card__icon {
+  margin-right: 0.25rem;
+}
+.stories-card__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+.stories-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.stories-card__desc {
+  font-size: var(--fs-body);
+  color: var(--color-fg);
+  margin-bottom: 1.25rem;
+}
+.stories-card__readmore {
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  align-self: flex-end;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.stories-card__readmore:hover {
+  color: var(--color-primary);
+}
+
+.stories-card__image-wrapper {
+  width: 100%;
+  height: 180px;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  overflow: hidden;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.stories-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* ==============================
+   GLOBAL THEME VARIABLES
+   ============================== */
+:root {
+  /* ----- PALETTE ----- */
+  --color-primary: #2b6777;
+  --color-accent: #52ab98;
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f2f2f2;
+  --color-fg: #2b6777;
+  --color-fg-soft: #7da0a9;
+  --color-border: #e5e7eb;
 
 .stat-label {
   display: block;
