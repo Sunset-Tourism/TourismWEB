@@ -230,28 +230,32 @@ export default function DashboardPage() {
             <Calendar className="dashboard-card-icon" />
             Upcoming Trips
           </h2>
-          <div className="upcoming-trips-list">
+          <div className="dashboard-upcoming-trips-list">
             {upcomingTrips.map((trip) => (
-              <div key={trip.id} className="trip-card">
-                <div className="trip-card-header">
-                  <div className="trip-destination">
-                    <MapPin className="trip-icon" />
+              <div key={trip.id} className="dashboard-trip-card">
+                <div className="dashboard-trip-header">
+                  <div className="dashboard-trip-destination">
+                    <MapPin className="dashboard-trip-icon" />
                     <h3>{trip.destination}</h3>
                   </div>
-                  <span className={`trip-status status-${trip.status}`}>
+                  <span
+                    className={`dashboard-trip-status dashboard-status-${trip.status}`}
+                  >
                     {trip.status}
                   </span>
                 </div>
-                <div className="trip-card-body">
-                  <div className="trip-dates">
-                    <Clock className="trip-icon-small" />
+                <div className="dashboard-trip-body">
+                  <div className="dashboard-trip-dates">
+                    <Clock className="dashboard-trip-icon-small" />
                     <span>
                       {trip.startDate} - {trip.endDate}
                     </span>
                   </div>
-                  <div className="trip-countdown">
-                    <span className="countdown-value">{trip.daysLeft}</span>
-                    <span className="countdown-label">days left</span>
+                  <div className="dashboard-trip-countdown">
+                    <span className="dashboard-countdown-value">
+                      {trip.daysLeft}
+                    </span>
+                    <span className="dashboard-countdown-label">days left</span>
                   </div>
                 </div>
               </div>
@@ -265,15 +269,15 @@ export default function DashboardPage() {
             <Heart className="dashboard-card-icon" />
             Saved Destinations
           </h2>
-          <div className="destinations-list">
+          <div className="dashboard-destinations-list">
             {savedDestinations.map((dest, i) => (
-              <div key={i} className="destination-item">
-                <div className="destination-info">
-                  <p className="destination-name">{dest.name}</p>
-                  <p className="destination-bookings">{dest.saves}</p>
+              <div key={i} className="dashboard-destination-item">
+                <div className="dashboard-destination-info">
+                  <p className="dashboard-destination-name">{dest.name}</p>
+                  <p className="dashboard-destination-bookings">{dest.saves}</p>
                 </div>
                 <button
-                  className="destination-view-btn"
+                  className="dashboard-destination-view-btn"
                   onClick={() => setSelectedDestination(i)}
                 >
                   View
@@ -355,30 +359,32 @@ export default function DashboardPage() {
       )}
 
       {/* Activity & Achievements */}
-      <div className="activity-grid">
+      <div className="dashboard-activity-grid">
         {/* Recent Activity */}
         <div className="dashboard-side-card">
           <h2 className="dashboard-card-title">
             <Clock className="dashboard-card-icon" />
             Recent Activity
           </h2>
-          <div className="activity-list">
+          <div className="dashboard-activity-list">
             {recentActivity.map((activity, i) => (
-              <div key={i} className="activity-item">
-                <div className="activity-icon-wrapper">
+              <div key={i} className="dashboard-activity-item">
+                <div className="dashboard-activity-icon-wrapper">
                   {activity.icon === "plane" && (
-                    <Plane className="activity-icon" />
+                    <Plane className="dashboard-activity-icon" />
                   )}
                   {activity.icon === "star" && (
-                    <Star className="activity-icon" />
+                    <Star className="dashboard-activity-icon" />
                   )}
                   {activity.icon === "bookmark" && (
-                    <Bookmark className="activity-icon" />
+                    <Bookmark className="dashboard-activity-icon" />
                   )}
                 </div>
-                <div className="activity-details">
-                  <p className="activity-message">{activity.message}</p>
-                  <p className="activity-date">{activity.time}</p>
+                <div className="dashboard-activity-details">
+                  <p className="dashboard-activity-message">
+                    {activity.message}
+                  </p>
+                  <p className="dashboard-activity-date">{activity.time}</p>
                 </div>
               </div>
             ))}
@@ -386,25 +392,27 @@ export default function DashboardPage() {
         </div>
 
         {/* Achievements & Preferences */}
-        <div className="alerts-container">
+        <div className="dashboard-alerts-container">
           {/* Achievements */}
           <div className="dashboard-side-card">
             <h2 className="dashboard-card-title">
               <Award className="dashboard-card-icon" />
               Achievements
             </h2>
-            <div className="achievements-grid">
+            <div className="dashboard-achievements-grid">
               {achievements.map((achievement, i) => (
                 <div
                   key={i}
-                  className={`achievement-badge ${
+                  className={`dashboard-achievement-badge ${
                     achievement.earned ? "earned" : "locked"
                   }`}
                 >
-                  <Award className="achievement-icon" />
-                  <div className="achievement-info">
-                    <p className="achievement-title">{achievement.title}</p>
-                    <p className="achievement-desc">
+                  <Award className="dashboard-achievement-icon" />
+                  <div className="dashboard-achievement-info">
+                    <p className="dashboard-achievement-title">
+                      {achievement.title}
+                    </p>
+                    <p className="dashboard-achievement-desc">
                       {achievement.description}
                     </p>
                   </div>
@@ -419,18 +427,20 @@ export default function DashboardPage() {
               <TrendingUp className="dashboard-card-icon" />
               Travel Preferences
             </h2>
-            <div className="preferences-list">
+            <div className="dashboard-preferences-list">
               {travelPreferences.map((pref, i) => (
-                <div key={i} className="preference-item">
-                  <div className="preference-header">
-                    <span className="preference-name">{pref.category}</span>
-                    <span className="preference-percent">
+                <div key={i} className="dashboard-preference-item">
+                  <div className="dashboard-preference-header">
+                    <span className="dashboard-preference-name">
+                      {pref.category}
+                    </span>
+                    <span className="dashboard-preference-percent">
                       {pref.percentage}%
                     </span>
                   </div>
-                  <div className="preference-bar">
+                  <div className="dashboard-preference-bar">
                     <div
-                      className="preference-fill"
+                      className="dashboard-preference-fill"
                       style={{ width: `${pref.percentage}%` }}
                     />
                   </div>
@@ -442,9 +452,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="quick-actions-card">
+      <div className="dashboard-quick-actions-card">
         <h2 className="dashboard-card-title">Quick Actions</h2>
-        <div className="quick-actions-grid">
+        <div className="dashboard-quick-actions-grid">
           <UserQuickAction
             icon={<Navigation />}
             label="Explore Destinations"
@@ -480,13 +490,13 @@ type UserStatCardProps = {
 
 function UserStatCard({ title, value, subtitle, icon }: UserStatCardProps) {
   return (
-    <div className="dashboard-stat-card user-stat-card">
-      <div className="stat-card-header">
-        <div className="stat-card-icon">{icon}</div>
+    <div className="dashboard-stat-card dashboard-user-stat-card">
+      <div className="dashboard-stat-header">
+        <div className="dashboard-stat-icon">{icon}</div>
       </div>
-      <h3 className="stat-card-title">{title}</h3>
-      <p className="stat-card-value">{value}</p>
-      <p className="stat-card-subtitle">{subtitle}</p>
+      <h3 className="dashboard-stat-title">{title}</h3>
+      <p className="dashboard-stat-value">{value}</p>
+      <p className="dashboard-stat-subtitle">{subtitle}</p>
     </div>
   );
 }
@@ -499,9 +509,11 @@ type UserQuickActionProps = {
 
 function UserQuickAction({ icon, label, color }: UserQuickActionProps) {
   return (
-    <button className={`quick-action-btn quick-action-${color}`}>
-      <div className="quick-action-icon">{icon}</div>
-      <span className="quick-action-label">{label}</span>
+    <button
+      className={`dashboard-quick-action-btn dashboard-quick-action-${color}`}
+    >
+      <div className="dashboard-quick-action-icon">{icon}</div>
+      <span className="dashboard-quick-action-label">{label}</span>
     </button>
   );
 }
