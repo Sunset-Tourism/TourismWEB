@@ -63,3 +63,5 @@ export function ActionButton({ icon, text, outline }: ActionButtonProps) {
     </motion.button>
   );
 }
+
+// Gradients moved to CSS using var(--color-accent)

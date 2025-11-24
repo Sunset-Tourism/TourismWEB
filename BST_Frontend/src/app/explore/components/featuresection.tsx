@@ -13,7 +13,7 @@ export function FeatureSection({
   icon,
   title,
   description,
-  color = "#2b6777",
+  color = "#52ab98",
 }: FeatureProps) {
   return (
     <motion.div
