@@ -16,6 +16,7 @@ import {
   Navigation,
   X,
 } from "lucide-react";
+import "./dashboard.css"; // Import dashboard-specific CSS
 
 export default function DashboardPage() {
   const [currentTime, setCurrentTime] = useState(new Date());

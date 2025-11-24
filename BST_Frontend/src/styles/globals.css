@@ -275,33 +275,9 @@
 .home-exp:hover {
   box-shadow: 0 32px 48px 0 rgba(0, 0, 0, 0.32) !important;
 }
-.home-exp.festivals {
-  grid-column: 1 / 3;
-  grid-row: 1 / 2;
-}
-.home-exp.food {
-  grid-column: 3 / 4;
-  grid-row: 1 / 2;
-}
-.home-exp.animal {
-  grid-column: 4 / 5;
-  grid-row: 1 / 2;
-}
-.home-exp.auspicious {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-}
-.home-exp.adventure {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-}
-.home-exp.dzongs {
-  grid-column: 3 / 5;
-  grid-row: 2 / 3;
-}
 
 .home-hotels {
-  margin: 5rem 0 2.5rem 0; /* Increased top margin for more spacing */
+  margin: 5rem 0 2.5rem 0;
 }
 .home-hotels-grid {
   display: flex;
@@ -1224,7 +1200,6 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* Slightly teal primary to match Bhutan palette */
     --primary: 195 47% 31%; /* approx #2b6777 */
     --primary-foreground: 210 40% 98%;
 
@@ -1449,7 +1424,6 @@ h6,
   background: var(--color-fg-soft);
   color: var(--color-primary);
 }
-/* Make icon react to hover for a cohesive button look */
 .sidebar-link:hover .icon-box {
   background: var(--color-fg-soft);
   color: var(--color-primary);
@@ -1790,933 +1764,1365 @@ h6,
   --color-fg-soft: #c8d8e4;
   --color-border: #e5e7eb;
 
-.dashboard-activity-details {
-  flex: 1;
-}
-
-.dashboard-activity-customer {
-  font-weight: 600;
-  color: var(--color-primary);
-  margin: 0 0 0.25rem;
-  font-size: 0.95rem;
-}
-
-.dashboard-activity-destination {
-  font-size: 0.85rem;
-  color: var(--color-fg-soft);
-  margin-top: 4px;
-}
-
-.dashboard-activity-date {
-  font-size: 0.75rem;
-  color: var(--color-fg-soft);
-  margin: 0;
-}
-
-.dashboard-activity-meta {
-  text-align: right;
-}
-
-.dashboard-activity-amount {
-  font-weight: 700;
-  color: var(--color-primary);
-  margin: 0 0 0.5rem;
-  font-size: 0.95rem;
-}
-
-.dashboard-activity-status {
-  font-size: 0.75rem;
-  font-weight: 600;
-  font-size: clamp(0.875rem, 2vw, 1rem);
-  color: var(--color-primary);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.dashboard-status-confirmed {
-  background: rgba(82, 171, 152, 0.2);
-  color: var(--color-accent);
-}
-
-.dashboard-status-pending {
-  background: rgba(255, 193, 7, 0.2);
-  color: #f59e0b;
-}
-
-/* Alerts Section */
-.dashboard-alerts-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.dashboard-alerts-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.dashboard-alert-item {
-  padding: 0.875rem 1rem;
-  border-radius: 0.75rem;
-  border-left: 4px solid;
-  transition: all 0.2s ease;
-}
-
-.dashboard-alert-item:hover {
-  transform: translateX(4px);
-}
-
-.dashboard-alert-warning {
-  background: rgba(255, 193, 7, 0.1);
-  border-color: #f59e0b;
-}
-
-.dashboard-alert-info {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: #3b82f6;
-}
-
-.dashboard-alert-success {
-  background: rgba(82, 171, 152, 0.1);
-  border-color: var(--color-accent);
-}
-
-.dashboard-alert-message {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-primary);
-  margin: 0 0 0.25rem;
-}
-
-.dashboard-alert-time {
-  font-size: 0.75rem;
-  color: var(--color-fg-soft);
-  margin: 0;
-}
-
-/* Reviews Section */
-.dashboard-reviews-list {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  flex: 1;
-  min-width: 250px;
-}
-
-.dashboard-review-item {
-  padding: 1rem;
-  background: var(--color-bg-secondary);
-  border-radius: 0.75rem;
-  transition: all 0.2s ease;
-}
-
-.dashboard-review-item:hover {
-  background: rgba(82, 171, 152, 0.08);
-}
-
-.dashboard-review-header {
-  display: flex;
-  gap: 0.75rem;
-  flex-shrink: 0;
-}
-
-.dashboard-review-customer {
-  font-weight: 600;
-  color: var(--color-primary);
-  font-size: 0.95rem;
-}
-
-.dashboard-review-rating {
-  display: flex;
-  gap: 2px;
-}
-
-.dashboard-review-star {
-  width: 16px;
-  height: 16px;
-  color: #ffc107;
-  fill: #ffc107;
-}
-
-.dashboard-review-comment {
-  font-size: 0.875rem;
-  color: var(--color-fg-soft);
-  margin: 0 0 0.5rem;
-  line-height: 1.5;
-}
-
-.dashboard-review-date {
-  font-size: 0.75rem;
-  color: var(--color-fg-soft);
-  margin: 0;
-}
-
-/* Quick Actions */
-.dashboard-quick-actions-card {
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 2px 12px rgba(43, 103, 119, 0.08);
-}
-
-.dashboard-quick-actions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
-}
-
-.dashboard-quick-action-btn {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-accent)
-  );
-  color: #fff;
-  border: none;
-  border-radius: 0.75rem;
-  padding: 1.25rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: var(--color-bg-secondary);
-  padding: 0.75rem 1.25rem;
-  border-radius: 16px;
-  flex-wrap: wrap;
-}
-
-.dashboard-quick-action-btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 8px 24px rgba(43, 103, 119, 0.3);
-}
-
-.dashboard-quick-action-icon {
-  width: 32px;
-  height: 32px;
-}
-
-.dashboard-quick-action-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-/* Color Variants for Quick Actions */
-.dashboard-quick-action-blue {
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-}
-
-.dashboard-quick-action-green {
-  background: linear-gradient(135deg, var(--color-accent), #52b788);
-}
-
-.dashboard-quick-action-purple {
-  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
-}
-
-.dashboard-quick-action-orange {
-  background: linear-gradient(135deg, #ea580c, #f97316);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 1024px) {
-  .dashboard-chart-card {
-    grid-column: span 1;
+  .dashboard-activity-details {
+    flex: 1;
   }
-}
 
-/* Info Panel */
-.map-info-panel {
-  background: linear-gradient(
-    135deg,
-    rgba(43, 103, 119, 0.95),
-    rgba(82, 171, 152, 0.95)
-  );
-  backdrop-filter: blur(10px);
-  color: white;
-  padding: 1.5rem;
-  border-radius: 16px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  position: relative;
+  .dashboard-activity-customer {
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 0.25rem;
+    font-size: 0.95rem;
+  }
 
-  .dashboard-header-content {
+  .dashboard-activity-destination {
+    font-size: 0.85rem;
+    color: var(--color-fg-soft);
+    margin-top: 4px;
+  }
+
+  .dashboard-activity-date {
+    font-size: 0.75rem;
+    color: var(--color-fg-soft);
+    margin: 0;
+  }
+
+  .dashboard-activity-meta {
+    text-align: right;
+  }
+
+  .dashboard-activity-amount {
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .dashboard-activity-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dashboard-status-confirmed {
+    background: rgba(82, 171, 152, 0.2);
+    color: var(--color-accent);
+  }
+
+  .dashboard-status-pending {
+    background: rgba(255, 193, 7, 0.2);
+    color: #f59e0b;
+  }
+
+  /* Alerts Section */
+  .dashboard-alerts-container {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .dashboard-time {
-    text-align: left;
-  }
-
-  .dashboard-stats-grid,
-  .dashboard-content-grid,
-  .dashboard-activity-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dashboard-quick-actions-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .dashboard-revenue-chart {
-    height: 220px;
-  }
-}
-
-@media (max-width: 480px) {
-  .dashboard-chart-label {
-    font-size: 0.65rem;
-  }
-
-  .dashboard-quick-actions-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ==============================
-   USER DASHBOARD ENHANCEMENTS
-   ============================== */
-
-/* User Stat Card Enhancements */
-.dashboard-user-stat-card {
-  position: relative;
-  overflow: visible;
-}
-
-.dashboard-user-stat-card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 1rem;
-  background: linear-gradient(
-    135deg,
-    rgba(82, 171, 152, 0.05),
-    rgba(43, 103, 119, 0.05)
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.dashboard-user-stat-card:hover::after {
-  opacity: 1;
-}
-
-.dashboard-user-stat-card .dashboard-stat-header {
-  margin-bottom: 1.25rem;
-}
-
-.dashboard-user-stat-card .dashboard-stat-icon {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-accent)
-  );
-  color: #fff;
-  box-shadow: 0 8px 24px rgba(43, 103, 119, 0.25);
-}
-
-.dashboard-stat-subtitle {
-  font-size: 0.8rem;
-  color: var(--color-fg-soft);
-  margin: 0.5rem 0 0;
-  font-weight: 500;
-  opacity: 0.85;
-}
-
-/* Upcoming Trips List - Enhanced Layout */
-.dashboard-upcoming-trips-list {
-  display: grid;
-  gap: 1.25rem;
-}
-
-.dashboard-trip-card {
-  background: linear-gradient(135deg, #ffffff, #f8f9fa);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid transparent;
-  box-shadow: 0 2px 12px rgba(43, 103, 119, 0.06);
-  position: relative;
-  overflow: hidden;
-}
-
-.dashboard-trip-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(82, 171, 152, 0.1),
-    transparent
-  );
-  transition: left 0.6s ease;
-}
-
-.dashboard-trip-card:hover::before {
-  left: 100%;
-}
-
-.dashboard-trip-card:hover {
-  border-color: var(--color-accent);
-  background: linear-gradient(135deg, #ffffff, rgba(82, 171, 152, 0.03));
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(43, 103, 119, 0.15);
-}
-
-.dashboard-trip-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.25rem;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.dashboard-trip-destination {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.dashboard-trip-destination h3 {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.dashboard-trip-icon {
-  width: 24px;
-  height: 24px;
-  color: var(--color-accent);
-  flex-shrink: 0;
-}
-
-.dashboard-trip-icon-small {
-  width: 18px;
-  height: 18px;
-  color: var(--color-primary);
-  flex-shrink: 0;
-}
-
-.dashboard-trip-status {
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  text-transform: capitalize;
-  letter-spacing: 0.3px;
-}
-
-.dashboard-trip-status.dashboard-status-confirmed {
-  background: linear-gradient(
-    135deg,
-    rgba(82, 171, 152, 0.2),
-    rgba(82, 171, 152, 0.1)
-  );
-  color: var(--color-accent);
-  border: 1px solid rgba(82, 171, 152, 0.3);
-}
-
-.dashboard-trip-status.dashboard-status-pending {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 193, 7, 0.2),
-    rgba(255, 193, 7, 0.1)
-  );
-  color: #f59e0b;
-  border: 1px solid rgba(255, 193, 7, 0.3);
-}
-
-.dashboard-trip-body {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.dashboard-trip-dates {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--color-primary);
-  background: var(--color-bg-secondary);
-  padding: 0.6rem 1rem;
-  border-radius: 0.75rem;
-}
-
-.dashboard-trip-countdown {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-accent)
-  );
-  border-radius: 0.75rem;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(43, 103, 119, 0.3);
-  min-width: 80px;
-}
-
-.dashboard-countdown-value {
-  font-size: 2rem;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.dashboard-countdown-label {
-  font-size: 0.75rem;
-  opacity: 0.95;
-  font-weight: 600;
-  margin-top: 0.25rem;
-}
-
-/* Saved Destinations - Enhanced */
-.dashboard-destination-view-btn {
-  background: linear-gradient(
-    135deg,
-    var(--color-accent),
-    var(--color-primary)
-  );
-  color: #fff;
-  border: none;
-  border-radius: 0.6rem;
-  padding: 0.6rem 1.25rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(82, 171, 152, 0.2);
-}
-
-.dashboard-destination-view-btn:hover {
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-accent)
-  );
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(43, 103, 119, 0.3);
-}
-
-/* Activity Icon Wrapper - Enhanced */
-.dashboard-activity-icon-wrapper {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: linear-gradient(
-    135deg,
-    rgba(43, 103, 119, 0.1),
-    rgba(82, 171, 152, 0.15)
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.3s ease;
-}
-
-.dashboard-activity-item:hover .dashboard-activity-icon-wrapper {
-  background: linear-gradient(
-    135deg,
-    var(--color-accent),
-    var(--color-primary)
-  );
-  transform: scale(1.1) rotate(5deg);
-}
-
-.dashboard-activity-icon {
-  width: 22px;
-  height: 22px;
-  color: var(--color-accent);
-  transition: color 0.3s ease;
-}
-
-.dashboard-activity-item:hover .dashboard-activity-icon {
-  color: #fff;
-}
-
-.dashboard-activity-message {
-  font-weight: 700;
-  color: var(--color-primary);
-  margin: 0 0 0.35rem;
-  font-size: 1rem;
-}
-
-.dashboard-activity-item {
-  gap: 1rem;
-  border-radius: 1rem;
-  border: 1px solid transparent;
-}
-
-.dashboard-activity-item:hover {
-  border-color: rgba(82, 171, 152, 0.2);
-  box-shadow: 0 4px 16px rgba(43, 103, 119, 0.08);
-}
-
-/* Achievements Grid - Enhanced */
-.dashboard-achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-}
-
-.dashboard-achievement-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px;
-  background: linear-gradient(135deg, #2b6777, #52b788);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.dashboard-achievement-badge.earned {
-  background: linear-gradient(
-    135deg,
-    rgba(82, 171, 152, 0.2),
-    rgba(82, 171, 152, 0.05)
-  );
-  border: 2px solid var(--color-accent);
-  box-shadow: 0 4px 16px rgba(82, 171, 152, 0.15);
-}
-
-.dashboard-achievement-badge.locked {
-  background: var(--color-bg-secondary);
-  border: 2px solid var(--color-border);
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.dashboard-achievement-badge:hover.earned {
-  transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 12px 32px rgba(82, 171, 152, 0.3);
-}
-
-.dashboard-achievement-badge.earned::before {
-  content: "✓";
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 24px;
-  height: 24px;
-  background: var(--color-accent);
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(82, 171, 152, 0.4);
-}
-
-.dashboard-achievement-icon {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 0.75rem;
-  transition: transform 0.3s ease;
-}
-
-.dashboard-achievement-badge:hover.earned .dashboard-achievement-icon {
-  transform: scale(1.2) rotate(10deg);
-}
-
-.dashboard-achievement-badge.earned .dashboard-achievement-icon {
-  color: var(--color-accent);
-  filter: drop-shadow(0 2px 8px rgba(82, 171, 152, 0.3));
-}
-
-.dashboard-achievement-badge.locked .dashboard-achievement-icon {
-  color: var(--color-fg-soft);
-}
-
-.dashboard-achievement-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.dashboard-achievement-title {
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  margin: 0;
-}
-
-.dashboard-achievement-desc {
-  font-size: 0.75rem;
-  color: var(--color-fg-soft);
-  margin: 0;
-  line-height: 1.4;
-}
-
-/* Travel Preferences - Enhanced */
-.dashboard-preferences-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.dashboard-preference-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.dashboard-preference-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.dashboard-preference-name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
-.dashboard-preference-percent {
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--color-accent);
-  background: rgba(82, 171, 152, 0.1);
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-}
-
-.dashboard-preference-bar {
-  width: 100%;
-  height: 12px;
-  background: var(--color-bg-secondary);
-  border-radius: 999px;
-  overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-  position: relative;
-}
-
-.dashboard-preference-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-  border-radius: 999px;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 12px rgba(82, 171, 152, 0.4);
-  position: relative;
-}
-
-.dashboard-preference-fill::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  animation: shimmer 2s infinite;
-}
-
-.region-btn:hover {
-  border-color: var(--color-accent);
-  background: linear-gradient(
-    135deg,
-    rgba(43, 103, 119, 0.05),
-    rgba(82, 183, 136, 0.05)
-  );
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(43, 103, 119, 0.15);
-}
-
-/* Enhanced Dashboard Cards */
-.dashboard-chart-card,
-.dashboard-side-card {
-  position: relative;
-  overflow: hidden;
-}
-
-.dashboard-chart-card::before,
-.dashboard-side-card::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(
-    135deg,
-    var(--color-accent),
-    var(--color-primary)
-  );
-  border-radius: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.dashboard-chart-card:hover::before,
-.dashboard-side-card:hover::before {
-  opacity: 0.1;
-}
-
-/* Responsive Enhancements */
-@media (max-width: 1200px) {
-  .dashboard-content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dashboard-chart-card {
-    grid-column: span 1;
-  }
-}
-
-@media (max-width: 768px) {
-  .dashboard-container {
-    padding: 1rem;
-  }
-
-  .dashboard-header-content {
-    flex-direction: column;
-    align-items: flex-start;
     gap: 1.5rem;
   }
 
-  .dashboard-time {
-    text-align: left;
-    width: 100%;
-  }
-
-  .dashboard-trip-card {
-    padding: 1.25rem;
-  }
-
-  .dashboard-trip-header {
+  .dashboard-alerts-list {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    gap: 0.75rem;
   }
 
-  .dashboard-trip-body {
-    flex-direction: column;
-    align-items: stretch;
+  .dashboard-alert-item {
+    padding: 0.875rem 1rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid;
+    transition: all 0.2s ease;
   }
 
-  .dashboard-trip-countdown {
-    align-self: center;
-    min-width: 100px;
+  .dashboard-alert-item:hover {
+    transform: translateX(4px);
   }
 
-  .dashboard-achievements-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .dashboard-alert-warning {
+    background: rgba(255, 193, 7, 0.1);
+    border-color: #f59e0b;
   }
 
-  .dashboard-quick-actions-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .dashboard-title {
-    font-size: 1.75rem;
+  .dashboard-alert-info {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
   }
 
-  .dashboard-subtitle {
+  .dashboard-alert-success {
+    background: rgba(82, 171, 152, 0.1);
+    border-color: var(--color-accent);
+  }
+
+  .dashboard-alert-message {
     font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 0.25rem;
   }
 
-  .dashboard-achievements-grid {
-    grid-template-columns: 1fr;
+  .dashboard-alert-time {
+    font-size: 0.75rem;
+    color: var(--color-fg-soft);
+    margin: 0;
   }
 
-  .dashboard-trip-destination h3 {
-    font-size: 1.1rem;
+  /* Reviews Section */
+  .dashboard-reviews-list {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .dashboard-review-item {
+    padding: 1rem;
+    background: var(--color-bg-secondary);
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+  }
+
+  .dashboard-review-item:hover {
+    background: rgba(82, 171, 152, 0.08);
+  }
+
+  .dashboard-review-header {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .dashboard-review-customer {
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+  }
+
+  .dashboard-review-rating {
+    display: flex;
+    gap: 2px;
+  }
+
+  .dashboard-review-star {
+    width: 16px;
+    height: 16px;
+    color: #ffc107;
+    fill: #ffc107;
+  }
+
+  .dashboard-review-comment {
+    font-size: 0.875rem;
+    color: var(--color-fg-soft);
+    margin: 0 0 0.5rem;
+    line-height: 1.5;
+  }
+
+  .dashboard-review-date {
+    font-size: 0.75rem;
+    color: var(--color-fg-soft);
+    margin: 0;
+  }
+
+  /* Quick Actions */
+  .dashboard-quick-actions-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(43, 103, 119, 0.08);
   }
 
   .dashboard-quick-actions-grid {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+
+  .dashboard-quick-action-btn {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    color: #fff;
+    border: none;
+    border-radius: 0.75rem;
+    padding: 1.25rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--color-bg-secondary);
+    padding: 0.75rem 1.25rem;
+    border-radius: 16px;
+    flex-wrap: wrap;
+  }
+
+  .dashboard-quick-action-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(43, 103, 119, 0.3);
+  }
+
+  .dashboard-quick-action-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .dashboard-quick-action-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* Color Variants for Quick Actions */
+  .dashboard-quick-action-blue {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+  }
+
+  .dashboard-quick-action-green {
+    background: linear-gradient(135deg, var(--color-accent), #52b788);
+  }
+
+  .dashboard-quick-action-purple {
+    background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+  }
+
+  .dashboard-quick-action-orange {
+    background: linear-gradient(135deg, #ea580c, #f97316);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .dashboard-chart-card {
+      grid-column: span 1;
+    }
+  }
+
+  /* Info Panel */
+  .map-info-panel {
+    background: linear-gradient(
+      135deg,
+      rgba(43, 103, 119, 0.95),
+      rgba(82, 171, 152, 0.95)
+    );
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    position: relative;
+
+    .dashboard-header-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .dashboard-time {
+      text-align: left;
+    }
+
+    .dashboard-stats-grid,
+    .dashboard-content-grid,
+    .dashboard-activity-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .dashboard-quick-actions-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-revenue-chart {
+      height: 220px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .dashboard-chart-label {
+      font-size: 0.65rem;
+    }
+
+    .dashboard-quick-actions-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ==============================
+   USER DASHBOARD ENHANCEMENTS
+   ============================== */
+
+  /* User Stat Card Enhancements */
+  .dashboard-user-stat-card {
+    position: relative;
+    overflow: visible;
+  }
+
+  .dashboard-user-stat-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 1rem;
+    background: linear-gradient(
+      135deg,
+      rgba(82, 171, 152, 0.05),
+      rgba(43, 103, 119, 0.05)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .dashboard-user-stat-card:hover::after {
+    opacity: 1;
+  }
+
+  .dashboard-user-stat-card .dashboard-stat-header {
+    margin-bottom: 1.25rem;
   }
 
   .dashboard-user-stat-card .dashboard-stat-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(43, 103, 119, 0.25);
+  }
+
+  .dashboard-stat-subtitle {
+    font-size: 0.8rem;
+    color: var(--color-fg-soft);
+    margin: 0.5rem 0 0;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  /* Upcoming Trips List - Enhanced Layout */
+  .dashboard-upcoming-trips-list {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .dashboard-trip-card {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    box-shadow: 0 2px 12px rgba(43, 103, 119, 0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dashboard-trip-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(82, 171, 152, 0.1),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+
+  .dashboard-trip-card:hover::before {
+    left: 100%;
+  }
+
+  .dashboard-trip-card:hover {
+    border-color: var(--color-accent);
+    background: linear-gradient(135deg, #ffffff, rgba(82, 171, 152, 0.03));
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(43, 103, 119, 0.15);
+  }
+
+  .dashboard-trip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .dashboard-trip-destination {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .dashboard-trip-destination h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .dashboard-trip-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .dashboard-trip-icon-small {
+    width: 18px;
+    height: 18px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .dashboard-trip-status {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+  }
+
+  .dashboard-trip-status.dashboard-status-confirmed {
+    background: linear-gradient(
+      135deg,
+      rgba(82, 171, 152, 0.2),
+      rgba(82, 171, 152, 0.1)
+    );
+    color: var(--color-accent);
+    border: 1px solid rgba(82, 171, 152, 0.3);
+  }
+
+  .dashboard-trip-status.dashboard-status-pending {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 193, 7, 0.2),
+      rgba(255, 193, 7, 0.1)
+    );
+    color: #f59e0b;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+  }
+
+  .dashboard-trip-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .dashboard-trip-dates {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    background: var(--color-bg-secondary);
+    padding: 0.6rem 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .dashboard-trip-countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    border-radius: 0.75rem;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(43, 103, 119, 0.3);
+    min-width: 80px;
+  }
+
+  .dashboard-countdown-value {
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .dashboard-countdown-label {
+    font-size: 0.75rem;
+    opacity: 0.95;
+    font-weight: 600;
+    margin-top: 0.25rem;
+  }
+
+  /* Saved Destinations - Enhanced */
+  .dashboard-destination-view-btn {
+    background: linear-gradient(
+      135deg,
+      var(--color-accent),
+      var(--color-primary)
+    );
+    color: #fff;
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(82, 171, 152, 0.2);
+  }
+
+  .dashboard-destination-view-btn:hover {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(43, 103, 119, 0.3);
+  }
+
+  /* Activity Icon Wrapper - Enhanced */
+  .dashboard-activity-icon-wrapper {
     width: 48px;
     height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(
+      135deg,
+      rgba(43, 103, 119, 0.1),
+      rgba(82, 171, 152, 0.15)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
   }
 
-  .dashboard-stat-value {
-    font-size: 1.75rem;
+  .dashboard-activity-item:hover .dashboard-activity-icon-wrapper {
+    background: linear-gradient(
+      135deg,
+      var(--color-accent),
+      var(--color-primary)
+    );
+    transform: scale(1.1) rotate(5deg);
   }
-}
 
-/* Smooth scroll behavior */
-.dashboard-container {
-  scroll-behavior: smooth;
-}
+  .dashboard-activity-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--color-accent);
+    transition: color 0.3s ease;
+  }
 
-/* Add subtle entrance animations */
-@keyframes fadeInUp {
-  from {
+  .dashboard-activity-item:hover .dashboard-activity-icon {
+    color: #fff;
+  }
+
+  .dashboard-activity-message {
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 0.35rem;
+    font-size: 1rem;
+  }
+
+  .dashboard-activity-item {
+    gap: 1rem;
+    border-radius: 1rem;
+    border: 1px solid transparent;
+  }
+
+  .dashboard-activity-item:hover {
+    border-color: rgba(82, 171, 152, 0.2);
+    box-shadow: 0 4px 16px rgba(43, 103, 119, 0.08);
+  }
+
+  /* Achievements Grid - Enhanced */
+  .dashboard-achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .dashboard-achievement-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: linear-gradient(135deg, #2b6777, #52b788);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .dashboard-achievement-badge.earned {
+    background: linear-gradient(
+      135deg,
+      rgba(82, 171, 152, 0.2),
+      rgba(82, 171, 152, 0.05)
+    );
+    border: 2px solid var(--color-accent);
+    box-shadow: 0 4px 16px rgba(82, 171, 152, 0.15);
+  }
+
+  .dashboard-achievement-badge.locked {
+    background: var(--color-bg-secondary);
+    border: 2px solid var(--color-border);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .dashboard-achievement-badge:hover.earned {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 32px rgba(82, 171, 152, 0.3);
+  }
+
+  .dashboard-achievement-badge.earned::before {
+    content: "✓";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(82, 171, 152, 0.4);
+  }
+
+  .dashboard-achievement-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.75rem;
+    transition: transform 0.3s ease;
+  }
+
+  .dashboard-achievement-badge:hover.earned .dashboard-achievement-icon {
+    transform: scale(1.2) rotate(10deg);
+  }
+
+  .dashboard-achievement-badge.earned .dashboard-achievement-icon {
+    color: var(--color-accent);
+    filter: drop-shadow(0 2px 8px rgba(82, 171, 152, 0.3));
+  }
+
+  .dashboard-achievement-badge.locked .dashboard-achievement-icon {
+    color: var(--color-fg-soft);
+  }
+
+  .dashboard-achievement-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .dashboard-achievement-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0;
+  }
+
+  .dashboard-achievement-desc {
+    font-size: 0.75rem;
+    color: var(--color-fg-soft);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Travel Preferences - Enhanced */
+  .dashboard-preferences-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .dashboard-preference-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .dashboard-preference-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dashboard-preference-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .dashboard-preference-percent {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    background: rgba(82, 171, 152, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .dashboard-preference-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--color-bg-secondary);
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+
+  .dashboard-preference-fill {
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    border-radius: 999px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px rgba(82, 171, 152, 0.4);
+    position: relative;
+  }
+
+  .dashboard-preference-fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  .region-btn:hover {
+    border-color: var(--color-accent);
+    background: linear-gradient(
+      135deg,
+      rgba(43, 103, 119, 0.05),
+      rgba(82, 183, 136, 0.05)
+    );
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(43, 103, 119, 0.15);
+  }
+
+  /* Enhanced Dashboard Cards */
+  .dashboard-chart-card,
+  .dashboard-side-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dashboard-chart-card::before,
+  .dashboard-side-card::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+      135deg,
+      var(--color-accent),
+      var(--color-primary)
+    );
+    border-radius: 1rem;
     opacity: 0;
-    transform: translateY(20px);
+    transition: opacity 0.3s ease;
+    z-index: -1;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .dashboard-chart-card:hover::before,
+  .dashboard-side-card:hover::before {
+    opacity: 0.1;
   }
-}
 
-.dashboard-stat-card,
-.dashboard-trip-card,
-.dashboard-destination-item,
-.dashboard-activity-item,
-.dashboard-achievement-badge,
-.dashboard-preference-item {
-  animation: fadeInUp 0.5s ease-out backwards;
-}
+  /* Responsive Enhancements */
+  @media (max-width: 1200px) {
+    .dashboard-content-grid {
+      grid-template-columns: 1fr;
+    }
 
-.dashboard-stat-card:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.dashboard-stat-card:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.dashboard-stat-card:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.dashboard-stat-card:nth-child(4) {
-  animation-delay: 0.4s;
-}
+    .dashboard-chart-card {
+      grid-column: span 1;
+    }
+  }
 
-.dashboard-trip-card:nth-child(1) {
-  animation-delay: 0.5s;
-}
-.dashboard-trip-card:nth-child(2) {
-  animation-delay: 0.6s;
-}
-.dashboard-trip-card:nth-child(3) {
-  animation-delay: 0.7s;
+  @media (max-width: 768px) {
+    .dashboard-container {
+      padding: 1rem;
+    }
+
+    .dashboard-header-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .dashboard-time {
+      text-align: left;
+      width: 100%;
+    }
+
+    .dashboard-trip-card {
+      padding: 1.25rem;
+    }
+
+    .dashboard-trip-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .dashboard-trip-body {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .dashboard-trip-countdown {
+      align-self: center;
+      min-width: 100px;
+    }
+
+    .dashboard-achievements-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-quick-actions-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .dashboard-title {
+      font-size: 1.75rem;
+    }
+
+    .dashboard-subtitle {
+      font-size: 0.9rem;
+    }
+
+    .dashboard-achievements-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .dashboard-trip-destination h3 {
+      font-size: 1.1rem;
+    }
+
+    .dashboard-quick-actions-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .dashboard-user-stat-card .dashboard-stat-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .dashboard-stat-value {
+      font-size: 1.75rem;
+    }
+  }
+
+  /* Smooth scroll behavior */
+  .dashboard-container {
+    scroll-behavior: smooth;
+  }
+
+  /* Add subtle entrance animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .dashboard-stat-card,
+  .dashboard-trip-card,
+  .dashboard-destination-item,
+  .dashboard-activity-item,
+  .dashboard-achievement-badge,
+  .dashboard-preference-item {
+    animation: fadeInUp 0.5s ease-out backwards;
+  }
+
+  .dashboard-stat-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .dashboard-stat-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .dashboard-stat-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .dashboard-stat-card:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  .dashboard-trip-card:nth-child(1) {
+    animation-delay: 0.5s;
+  }
+  .dashboard-trip-card:nth-child(2) {
+    animation-delay: 0.6s;
+  }
+  .dashboard-trip-card:nth-child(3) {
+    animation-delay: 0.7s;
+  }
+
+  /* ==============================
+   DESTINATION PREVIEW MODAL (SHARED)
+   ============================== */
+
+  .destination-preview-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    animation: overlayFadeIn 0.3s ease;
+    overflow-y: auto;
+  }
+
+  @keyframes overlayFadeIn {
+    from {
+      opacity: 0;
+      backdrop-filter: blur(0px);
+    }
+    to {
+      opacity: 1;
+      backdrop-filter: blur(8px);
+    }
+  }
+
+  .destination-preview-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
+    border-radius: 24px;
+    padding: 2.5rem;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 80px rgba(43, 103, 119, 0.5);
+    animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    border: 3px solid rgba(82, 171, 152, 0.2);
+  }
+
+  @keyframes modalSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .destination-preview-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(43, 103, 119, 0.1);
+    border: 2px solid rgba(43, 103, 119, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .destination-preview-close:hover {
+    background: var(--color-primary);
+    color: #fff;
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 4px 16px rgba(43, 103, 119, 0.3);
+  }
+
+  .destination-preview-header {
+    margin-bottom: 2rem;
+    padding-right: 3rem;
+  }
+
+  .destination-preview-header h3 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #2b6777, #52b788);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .destination-preview-saves {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    background: rgba(82, 171, 152, 0.1);
+    border-radius: 999px;
+    width: fit-content;
+    border: 2px solid rgba(82, 171, 152, 0.2);
+  }
+
+  .preview-heart-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--color-accent);
+  }
+
+  .destination-preview-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .destination-preview-image-wrapper {
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      rgba(43, 103, 119, 0.08),
+      rgba(82, 171, 152, 0.08)
+    );
+    border: 3px solid rgba(82, 171, 152, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .destination-preview-image-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(43, 103, 119, 0.25);
+    border-color: var(--color-accent);
+  }
+
+  .destination-preview-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+  }
+
+  .destination-preview-image-wrapper:hover
+    .destination-preview-image-placeholder {
+    transform: scale(1.1);
+    color: var(--color-accent);
+  }
+
+  .image-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-fg-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .destination-preview-description {
+    margin-bottom: 2rem;
+    padding: 1.75rem;
+    background: linear-gradient(135deg, #f5fbff 0%, #e8f9ff 100%);
+    border-radius: 16px;
+    border-left: 4px solid var(--color-accent);
+    box-shadow: 0 4px 16px rgba(43, 103, 119, 0.08);
+  }
+
+  .destination-preview-description h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .destination-preview-description h4::before {
+    content: "📍";
+    font-size: 1.5rem;
+  }
+
+  .destination-preview-description p {
+    color: var(--color-fg);
+    line-height: 1.8;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .destination-preview-highlights {
+    margin-bottom: 2rem;
+  }
+
+  .destination-preview-highlights h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0 0 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .destination-preview-highlights h4::before {
+    content: "✨";
+    font-size: 1.5rem;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .highlight-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(
+      135deg,
+      rgba(43, 103, 119, 0.08),
+      rgba(82, 171, 152, 0.08)
+    );
+    border: 2px solid rgba(82, 171, 152, 0.3);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .highlight-badge svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .highlight-badge:hover {
+    background: linear-gradient(
+      135deg,
+      var(--color-accent),
+      var(--color-primary)
+    );
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(82, 171, 152, 0.35);
+  }
+
+  .highlight-badge:hover svg {
+    color: #fff;
+  }
+
+  .destination-preview-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .destination-preview-book-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(43, 103, 119, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .destination-preview-book-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(43, 103, 119, 0.45);
+  }
+
+  .destination-preview-save-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+    color: var(--color-primary);
+    border: 3px solid var(--color-primary);
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .destination-preview-save-btn:hover {
+    background: var(--color-primary);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(43, 103, 119, 0.3);
+  }
+
+  /* Mobile Responsive for Modal */
+  @media (max-width: 768px) {
+    .destination-preview-overlay {
+      padding: 0;
+      align-items: flex-end;
+    }
+
+    .destination-preview-content {
+      max-width: 100%;
+      width: 100%;
+      max-height: 95vh;
+      border-radius: 24px 24px 0 0;
+      animation: modalSlideUpMobile 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 2rem 1.5rem;
+    }
+
+    @keyframes modalSlideUpMobile {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .destination-preview-images {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .destination-preview-header h3 {
+      font-size: 1.75rem;
+    }
+
+    .destination-preview-actions {
+      flex-direction: column;
+    }
+
+    .highlights-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .destination-preview-close {
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .destination-preview-content {
+      padding: 1.5rem 1rem;
+    }
+
+    .destination-preview-images {
+      grid-template-columns: 1fr;
+    }
+
+    .destination-preview-header h3 {
+      font-size: 1.5rem;
+    }
+
+    .destination-preview-description {
+      padding: 1.25rem;
+    }
+  }
+
+  /* Smooth scrollbar for preview content */
+  .destination-preview-content::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .destination-preview-content::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+    margin: 10px 0;
+  }
+
+  .destination-preview-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      var(--color-accent),
+      var(--color-primary)
+    );
+    border-radius: 10px;
+  }
+
+  .destination-preview-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      180deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+  }
+
+  /* Prevent body scroll when modal is open */
+  body:has(.destination-preview-overlay) {
+    overflow: hidden;
+  }
 }

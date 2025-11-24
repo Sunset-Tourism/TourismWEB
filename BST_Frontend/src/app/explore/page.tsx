@@ -6,7 +6,7 @@ import { FeatureSection } from "./components/featuresection";
 import { DestinationCard } from "./components/destinationcard";
 import { ActionButton } from "./components/actionbutton";
 import { MapPin, Calendar, Bus, Compass, Sparkles } from "lucide-react";
-import "../../styles/globals.css";
+import "./explore.css"; // Import explore-specific CSS
 import "./components/leaflet-setup.css";
 import { motion, Variants } from "framer-motion";
 
