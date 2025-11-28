@@ -476,6 +476,7 @@ h6,
   border-radius: 0.5rem;
 }
 
+
 /* =====================
    Homepage Styles
    ===================== */
@@ -651,7 +652,7 @@ h6,
 }
 .home-section-subtitle {
   font-size: 17.28px;
-  color: var(--color-fg-soft);
+  color: var(--color-primary);
   text-align: center;
   margin-bottom: 35.2px;
   margin-top: -19.2px;
@@ -791,7 +792,6 @@ h6,
   }
   .home-section-title,
   .home-section-subtitle {
-    margin-left: -28px;
     margin-bottom: 20px;
   }
   .home-card-featured {
@@ -828,7 +828,7 @@ h6,
 }
 .home-experience-subtitle {
   font-size: 1.08rem;
-  color: var(--color-fg-soft);
+  color: var(--color-primary);
   text-align: center;
   margin-bottom: 2.2rem;
   margin-top: -1.2rem;
@@ -1121,7 +1121,7 @@ h6,
 }
 .home-hotel-subtitle {
   font-size: 1.08rem;
-  color: var(--color-fg-soft);
+  color: var(--color-primary);
   text-align: center;
   margin-bottom: 2.2rem;
   margin-top: -1.2rem;
@@ -1588,6 +1588,7 @@ h6,
     width: 260px;
     margin-left: 10px;
   }
+}
 
 .home-cta {
   background: linear-gradient(
@@ -1690,6 +1691,12 @@ h6,
     font-size: 0.92rem;
   }
 }
+@media (max-width: 500px) {
+  .home-cta {
+    width: 405px;
+    margin-left: -3px;
+  }
+}
 @media (max-width: 480px) {
   .home-cta {
     width: 395px;
@@ -1733,11 +1740,223 @@ h6,
     padding: 1.5rem;
   }
 }
-
 /* =====================
-   END EXPLORE PAGE STYLES
+   END HOME PAGE STYLES
    ===================== */
 
+/* =====================
+   STORIES PAGE STYLES
+   ===================== */
+.stories-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(43, 103, 119, 0.04);
+  padding: 1.5rem 1.25rem 1.25rem 1.25rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+.stories-card:hover {
+  box-shadow: 0 4px 16px rgba(82, 171, 152, 0.12);
+  border-color: var(--color-accent);
+}
+.stories-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.stories-card__category {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  margin-bottom: 0.25rem;
+  width: fit-content;
+}
+.stories-card__category--history {
+  background: var(--color-primary);
+}
+.stories-card__category--culture {
+  background: var(--color-accent);
+}
+.stories-card__category--lifestyle {
+  background: #c8d8e4;
+  color: var(--color-primary);
+}
+.stories-card__category--traditions {
+  background: #e5e7eb;
+  color: var(--color-primary);
+}
+.stories-card__icon {
+  margin-right: 0.25rem;
+}
+.stories-card__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+.stories-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.stories-card__desc {
+  font-size: var(--fs-body);
+  color: var(--color-fg);
+  margin-bottom: 1.25rem;
+}
+.stories-card__readmore {
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  align-self: flex-end;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.stories-card__readmore:hover {
+  color: var(--color-primary);
+}
+
+.stories-card__image-wrapper {
+  width: 100%;
+  height: 180px;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  overflow: hidden;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.stories-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* =====================
+   END STORIES PAGE STYLES
+   ===================== */
+
+   /* Enhanced Hero Section */
+.hero-explore {
+  position: relative;
+  text-align: center;
+  padding: clamp(4rem, 12vh, 8rem) 2rem clamp(3rem, 8vh, 6rem);
+  background: linear-gradient(135deg, #f8fffe 0%, #e8f4f8 100%);
+  overflow: hidden;
+}
+
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+      circle at 20% 50%,
+      rgba(43, 103, 119, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(82, 171, 152, 0.03) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.hero-content-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  box-shadow: 0 4px 15px rgba(43, 103, 119, 0.1);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(43, 103, 119, 0.1);
+}
+
+.hero-explore h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.hero-description {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--color-fg-soft);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.stat-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-value {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  color: var(--color-fg-soft);
+  font-weight: 500;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-border),
+    transparent
+  );
+}
 /* Section Wrappers */
 .map-section-wrapper {
   background: var(--color-bg);
@@ -1903,31 +2122,6 @@ h6,
   animation: fadeInUp 0.6s ease-out;
 }
 
-@media (max-width: 900px) {
-  .home-experience-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 100px);
-  }
-}
-
-@media (max-width: 600px) {
-  .home-hero-title {
-    font-size: 1.5rem;
-  }
-  .home-section-title {
-    font-size: 1.1rem;
-  }
-  .home-featured-grid,
-  .home-hotels-grid,
-  .home-themed-info-grid {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .home-experience-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 80px);
-  }
-}
 
 @import "tailwindcss";
 
