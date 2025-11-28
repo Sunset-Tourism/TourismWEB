@@ -37,20 +37,20 @@ const experiences = [
 export default function ExperienceGrid() {
   return (
     <section className="home-experience">
-      <h2 className="home-section-title">Experience Bhutanese</h2>
+      <h2 className="home-experience-title">Experience Bhutanese</h2>
+      <div className="home-experience-subtitle">
+        Immerse yourself in Bhutan’s rich traditions, local cuisines, and
+        vibrant festivals — live the culture, not just visit it.
+      </div>
       <div className="home-experience-grid">
         {experiences.map((exp, i) => (
-          <div
-            className={`home-exp ${exp.className}`}
-            key={i}
-            style={{ position: "relative", overflow: "hidden" }}
-          >
+          <div className={`home-exp ${exp.className}`} key={i}>
             <Image
               src={exp.image}
               alt={exp.label}
               fill
               className="home-exp-img"
-              sizes="(max-width: 600px) 100vw, 220px"
+              sizes="(max-width: 600px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
               priority={i === 0}
             />
             <span className="home-exp-label">{exp.label}</span>

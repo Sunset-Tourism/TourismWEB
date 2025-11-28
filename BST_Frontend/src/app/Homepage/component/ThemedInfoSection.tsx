@@ -5,14 +5,15 @@ export default function ThemedInfoSection() {
   return (
     <section className="themed-info-section">
       <div className="themed-info-card">
-        <Image
-          src="/adventure2.png"
-          alt="adventure"
-          width={260}
-          height={260}
-          className="themed-info-img"
-          priority
-        />
+        <div className="themed-info-img-wrapper">
+          <Image
+            src="/adventure2.png"
+            alt="adventure"
+            fill
+            className="themed-info-img"
+            priority
+          />
+        </div>
         <div className="themed-info-title">
           adventure <ArrowRight strokeWidth={2.2} />
         </div>
@@ -23,14 +24,15 @@ export default function ThemedInfoSection() {
         </div>
       </div>
       <div className="themed-info-card culture">
-        <Image
-          src="/culture.png"
-          alt="culture"
-          width={260}
-          height={260}
-          className="themed-info-img"
-          priority
-        />
+        <div className="themed-info-img-wrapper">
+          <Image
+            src="/culture.png"
+            alt="culture"
+            fill
+            className="themed-info-img"
+            priority
+          />
+        </div>
         <div className="themed-info-title">
           culture <ArrowRight strokeWidth={2.2} />
         </div>
@@ -41,14 +43,15 @@ export default function ThemedInfoSection() {
         </div>
       </div>
       <div className="themed-info-card sustainability">
-        <Image
-          src="/wellness.png"
-          alt="wellness"
-          width={260}
-          height={260}
-          className="themed-info-img"
-          priority
-        />
+        <div className="themed-info-img-wrapper">
+          <Image
+            src="/wellness.png"
+            alt="wellness"
+            fill
+            className="themed-info-img"
+            priority
+          />
+        </div>
         <div className="themed-info-title">
           wellness <ArrowRight strokeWidth={2.2} />
         </div>

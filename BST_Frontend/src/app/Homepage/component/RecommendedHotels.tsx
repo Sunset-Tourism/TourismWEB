@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 // Example hotel data (replace with real data or props as needed)
 const hotels = [
@@ -7,7 +8,7 @@ const hotels = [
     image: "/six senses.png",
   },
   {
-    title: "Amankora Gangtey",
+    title: "AmankoraGangtey",
     image: "/amankora.png",
   },
   {
@@ -15,77 +16,55 @@ const hotels = [
     image: "/paro eco lodge.png",
   },
   {
-    title: "&Beyond Punakha River Lodge",
+    title: "BeyondPunakha",
     image: "/andBeyond punakha.png",
+  },
+  {
+    isViewMore: true as const,
   },
 ];
 
 export default function RecommendedHotels() {
   return (
     <section className="home-hotels">
-      <h2 className="home-section-title">Recommended Hotels</h2>
-      <div className="home-hotels-grid">
-        {hotels.map((hotel, i) => (
-          <div
-            className="home-card-hotel"
-            key={i}
-            style={{
-              background: "#fff",
-              borderRadius: "1.25rem",
-              boxShadow: "0 2px 12px rgba(43,103,119,0.09)",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: 0,
-              minHeight: 480,
-              maxWidth: 340,
-              width: "100%",
-            }}
-          >
-            <div style={{ width: "100%", height: 220, position: "relative" }}>
-              <Image
-                src={hotel.image}
-                alt={hotel.title}
-                fill
-                style={{
-                  objectFit: "cover",
-                  borderTopLeftRadius: "1.25rem",
-                  borderTopRightRadius: "1.25rem",
-                }}
-                sizes="(max-width: 600px) 100vw, 340px"
-                priority={i === 0}
-              />
-            </div>
-            <div
-              style={{
-                padding: "1.5rem 1rem 0.5rem 1rem",
-                width: "100%",
-                textAlign: "center",
-                fontWeight: 700,
-                fontSize: "1.35rem",
-                color: "#444",
-                fontFamily: "inherit",
-                minHeight: 60,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+      <h2 className="home-hotel-title">Recommended Hotels</h2>
+      <div className="home-hotel-subtitle">
+        Stay in comfort and authenticity — handpicked hotels that blend
+        Bhutanese charm with modern hospitality.
+      </div>
+      <div className="home-hotels-scroll">
+        {hotels.map((hotel, i) =>
+          (hotel as any).isViewMore ? (
+            <Link
+              href="/booking/hotel"
+              className="home-card-hotel view-more-card"
+              key={`view-more-${i}`}
             >
-              {hotel.title}
+              <div className="view-more-title">View more hotels</div>
+              <div className="view-more-desc">
+                Find more stays and book your perfect trip.
+              </div>
+              <button className="hotel-btn">Go to Booking</button>
+            </Link>
+          ) : (
+            <div className="home-card-hotel" key={i}>
+              <div className="hotel-card-img">
+                <Image
+                  src={(hotel as any).image}
+                  alt={(hotel as any).title}
+                  fill
+                  className="hotel-card-image"
+                  sizes="(max-width: 600px) 100vw, 340px"
+                  priority={i === 0}
+                />
+              </div>
+              <div className="hotel-card-title">{(hotel as any).title}</div>
+              <div className="hotel-card-btn-row">
+                <button className="hotel-btn">More Details</button>
+              </div>
             </div>
-            <div
-              style={{
-                padding: "1rem 0 1.5rem 0",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <button className="hotel-btn">More Details</button>
-            </div>
-          </div>
-        ))}
+          )
+        )}
       </div>
     </section>
   );
