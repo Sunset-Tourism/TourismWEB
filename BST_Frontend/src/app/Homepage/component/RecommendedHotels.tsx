@@ -2,7 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Example hotel data (replace with real data or props as needed)
-const hotels = [
+type HotelCard = { title: string; image: string };
+type HotelViewMore = { isViewMore: true };
+type HotelItem = HotelCard | HotelViewMore;
+
+const hotels: HotelItem[] = [
   {
     title: "Six Senses Paro",
     image: "/six senses.png",
@@ -34,7 +38,7 @@ export default function RecommendedHotels() {
       </div>
       <div className="home-hotels-scroll">
         {hotels.map((hotel, i) =>
-          (hotel as any).isViewMore ? (
+          "isViewMore" in hotel ? (
             <Link
               href="/booking/hotel"
               className="home-card-hotel view-more-card"
@@ -50,15 +54,15 @@ export default function RecommendedHotels() {
             <div className="home-card-hotel" key={i}>
               <div className="hotel-card-img">
                 <Image
-                  src={(hotel as any).image}
-                  alt={(hotel as any).title}
+                  src={hotel.image}
+                  alt={hotel.title}
                   fill
                   className="hotel-card-image"
                   sizes="(max-width: 600px) 100vw, 340px"
                   priority={i === 0}
                 />
               </div>
-              <div className="hotel-card-title">{(hotel as any).title}</div>
+              <div className="hotel-card-title">{hotel.title}</div>
               <div className="hotel-card-btn-row">
                 <button className="hotel-btn">More Details</button>
               </div>

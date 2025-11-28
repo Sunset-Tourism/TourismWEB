@@ -1588,6 +1588,7 @@ h6,
     width: 260px;
     margin-left: 10px;
   }
+}
 
 .home-cta {
   background: linear-gradient(
@@ -3380,69 +3381,69 @@ h6,
       font-size: 1.1rem;
     }
 
-/* ==============================
+    /* ==============================
    HERO SECTION
    ============================== */
-.homepage .hero {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(
-    to bottom,
-    var(--color-bg),
-    var(--color-bg-secondary)
-  );
-  animation: fadeIn 0.8s ease-in-out;
-}
+    .homepage .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(
+        to bottom,
+        var(--color-bg),
+        var(--color-bg-secondary)
+      );
+      animation: fadeIn 0.8s ease-in-out;
+    }
 
-.homepage .hero h1 {
-  font-size: 2.8rem;
-  margin-bottom: 16px;
-}
+    .homepage .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+    }
 
-.homepage .hero p {
-  font-size: 1.2rem;
-  color: var(--color-fg-soft);
-  margin-bottom: 20px;
-}
+    .homepage .hero p {
+      font-size: 1.2rem;
+      color: var(--color-fg-soft);
+      margin-bottom: 20px;
+    }
 
-.homepage .hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
+    .homepage .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
 
-/* ==============================
+    /* ==============================
    ACTION BUTTONS
    ============================== */
-.homepage .action-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background-color: var(--color-primary);
-  border: none;
-  border-radius: var(--radius-md);
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-.homepage .action-button:hover {
-  background-color: var(--color-accent);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-.homepage .action-button.outline {
-  background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-}
-.homepage .action-button.outline:hover {
-  background-color: var(--color-primary);
-  color: #fff;
-}
+    .homepage .action-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background-color: var(--color-primary);
+      border: none;
+      border-radius: var(--radius-md);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .homepage .action-button:hover {
+      background-color: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .homepage .action-button.outline {
+      background: transparent;
+      color: var(--color-primary);
+      border: 2px solid var(--color-primary);
+    }
+    .homepage .action-button.outline:hover {
+      background-color: var(--color-primary);
+      color: #fff;
+    }
     .dashboard-quick-actions-grid {
       grid-template-columns: 1fr;
     }
@@ -3509,171 +3510,171 @@ h6,
   /* ==============================
    DESTINATION PREVIEW MODAL (SHARED)
    ============================== */
-.homepage .features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
-  padding: 80px 20px;
-  background-color: var(--color-bg-secondary);
-}
-.homepage .feature-section {
-  flex: 1 1 260px;
-  text-align: center;
-  padding: 24px;
-  border-radius: var(--radius-lg);
-  background: var(--color-bg);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.homepage .feature-section:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-.homepage .feature-icon {
-  font-size: 2.5rem;
-  color: var(--color-accent);
-  margin-bottom: 12px;
-}
+  .homepage .features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    padding: 80px 20px;
+    background-color: var(--color-bg-secondary);
+  }
+  .homepage .feature-section {
+    flex: 1 1 260px;
+    text-align: center;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    background: var(--color-bg);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .homepage .feature-section:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+  .homepage .feature-icon {
+    font-size: 2.5rem;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+  }
 
-/* ==============================
+  /* ==============================
    DESTINATIONS
    ============================== */
-.homepage .destinations {
-  padding: 80px 20px;
-  background-color: var(--color-bg);
-}
-.homepage .destinations h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 40px;
-  color: var(--color-primary);
-}
-.homepage .destination-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 28px;
-}
-.homepage .destination-card {
-  background: var(--color-bg);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--color-border);
-  transition: all 0.25s ease;
-}
-.homepage .destination-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-.homepage .destination-card h3 {
-  margin-bottom: 8px;
-}
-.homepage .destination-card .location {
-  font-weight: 600;
-  color: var(--color-accent);
-  margin-bottom: 10px;
-}
-.homepage .explore-btn {
-  margin-top: 12px;
-  background-color: var(--color-primary);
-  border: none;
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-.homepage .explore-btn:hover {
-  background-color: var(--color-accent);
-  transform: translateY(-2px);
-}
+  .homepage .destinations {
+    padding: 80px 20px;
+    background-color: var(--color-bg);
+  }
+  .homepage .destinations h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: var(--color-primary);
+  }
+  .homepage .destination-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+  }
+  .homepage .destination-card {
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    transition: all 0.25s ease;
+  }
+  .homepage .destination-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+  .homepage .destination-card h3 {
+    margin-bottom: 8px;
+  }
+  .homepage .destination-card .location {
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+  }
+  .homepage .explore-btn {
+    margin-top: 12px;
+    background-color: var(--color-primary);
+    border: none;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .homepage .explore-btn:hover {
+    background-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
 
-/* ==============================
+  /* ==============================
    MAP SECTION (Enhanced)
    ============================== */
-.homepage .map-section {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(
-    to bottom,
-    var(--color-bg-secondary),
-    var(--color-fg-soft)
-  );
-  position: relative;
-  overflow: hidden;
-}
-.homepage .map-section h2 {
-  font-size: 2rem;
-  color: var(--color-primary);
-  margin-bottom: 24px;
-}
-.homepage .interactive-map {
-  position: relative;
-  height: 450px;
-  max-width: 900px;
-  margin: 0 auto;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: linear-gradient(
-      rgba(43, 103, 119, 0.25),
-      rgba(82, 171, 152, 0.25)
-    ),
-    url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Bhutan_location_map.svg/1024px-Bhutan_location_map.svg.png")
-      center/cover no-repeat;
-  box-shadow: var(--shadow-md);
-  transform: scale(1);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.homepage .interactive-map:hover {
-  transform: scale(1.02);
-  box-shadow: 0 12px 28px rgba(43, 103, 119, 0.25);
-}
-.homepage .map-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(43, 103, 119, 0.25);
-  backdrop-filter: blur(6px);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-}
-.homepage .map-overlay:hover {
-  background: rgba(43, 103, 119, 0.35);
-}
-.homepage .map-overlay h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-.homepage .map-overlay p {
-  max-width: 500px;
-  font-size: 1rem;
-  color: #f0f0f0;
-}
-.homepage .map-buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
-}
-.homepage .map-btn {
-  padding: 10px 18px;
-  border-radius: var(--radius-md);
-  background-color: var(--color-primary);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-.homepage .map-btn:hover {
-  background-color: var(--color-accent);
-  transform: translateY(-3px);
-}
+  .homepage .map-section {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(
+      to bottom,
+      var(--color-bg-secondary),
+      var(--color-fg-soft)
+    );
+    position: relative;
+    overflow: hidden;
+  }
+  .homepage .map-section h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 24px;
+  }
+  .homepage .interactive-map {
+    position: relative;
+    height: 450px;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: linear-gradient(
+        rgba(43, 103, 119, 0.25),
+        rgba(82, 171, 152, 0.25)
+      ),
+      url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Bhutan_location_map.svg/1024px-Bhutan_location_map.svg.png")
+        center/cover no-repeat;
+    box-shadow: var(--shadow-md);
+    transform: scale(1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .homepage .interactive-map:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 28px rgba(43, 103, 119, 0.25);
+  }
+  .homepage .map-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(43, 103, 119, 0.25);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+  }
+  .homepage .map-overlay:hover {
+    background: rgba(43, 103, 119, 0.35);
+  }
+  .homepage .map-overlay h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  .homepage .map-overlay p {
+    max-width: 500px;
+    font-size: 1rem;
+    color: #f0f0f0;
+  }
+  .homepage .map-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .homepage .map-btn {
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  .homepage .map-btn:hover {
+    background-color: var(--color-accent);
+    transform: translateY(-3px);
+  }
 
   .destination-preview-overlay {
     position: fixed;
