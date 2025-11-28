@@ -47,7 +47,13 @@ const stories = [
   },
 ];
 
-const categories = ["All Stories", "History", "Culture", "Lifestyle", "Traditions"];
+const categories = [
+  "All Stories",
+  "History",
+  "Culture",
+  "Lifestyle",
+  "Traditions",
+];
 
 export default function StoriesPage() {
   const [selected, setSelected] = useState("All Stories");
@@ -57,19 +63,48 @@ export default function StoriesPage() {
       : stories.filter((story) => story.category === selected);
 
   return (
-    <section className="stories-section" style={{ background: "var(--color-bg-secondary)", padding: "2rem 0" }}>
+    <section
+      className="stories-section"
+      style={{ background: "var(--color-bg-secondary)", padding: "2rem 0" }}
+    >
       <div className="max-w-5xl mx-auto px-4">
-        <h1 className="stories-section__title" style={{ fontSize: "var(--fs-h1)", color: "var(--color-primary)", textAlign: "center", fontWeight: 700, marginBottom: "0.5rem" }}>
+        <h1
+          className="stories-section__title"
+          style={{
+            fontSize: "var(--fs-h1)",
+            color: "var(--color-primary)",
+            textAlign: "center",
+            fontWeight: 700,
+            marginBottom: "0.5rem",
+          }}
+        >
           Stories from the Kingdom
         </h1>
-        <p className="stories-section__subtitle" style={{ textAlign: "center", color: "var(--color-fg)", marginBottom: "2rem" }}>
-          Discover Bhutan's rich traditions, history, and lifestyle
+        <p
+          className="stories-section__subtitle"
+          style={{
+            textAlign: "center",
+            color: "var(--color-fg)",
+            marginBottom: "2rem",
+          }}
+        >
+          Discover Bhutan&apos;s rich traditions, history, and lifestyle
         </p>
-        <div className="stories-section__filters" style={{ display: "flex", gap: "0.75rem", justifyContent: "center", marginBottom: "2rem" }}>
+        <div
+          className="stories-section__filters"
+          style={{
+            display: "flex",
+            gap: "0.75rem",
+            justifyContent: "center",
+            marginBottom: "2rem",
+          }}
+        >
           {categories.map((cat) => (
             <button
               key={cat}
-              className={`stories-section__filter-btn${selected === cat ? " stories-section__filter-btn--active" : ""}`}
+              className={`stories-section__filter-btn${
+                selected === cat ? " stories-section__filter-btn--active" : ""
+              }`}
               style={{
                 background: selected === cat ? "var(--color-accent)" : "#fff",
                 color: selected === cat ? "#fff" : "var(--color-primary)",
@@ -79,7 +114,8 @@ export default function StoriesPage() {
                 fontWeight: 600,
                 cursor: "pointer",
                 fontSize: "var(--fs-nav)",
-                boxShadow: selected === cat ? "0 2px 8px rgba(82,171,152,0.08)" : "none",
+                boxShadow:
+                  selected === cat ? "0 2px 8px rgba(82,171,152,0.08)" : "none",
                 transition: "all 0.2s",
               }}
               onClick={() => setSelected(cat)}
@@ -88,7 +124,14 @@ export default function StoriesPage() {
             </button>
           ))}
         </div>
-        <div className="stories-section__grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "2rem" }}>
+        <div
+          className="stories-section__grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "2rem",
+          }}
+        >
           {filteredStories.map((story, idx) => (
             <StoriesCard key={idx} {...story} />
           ))}
