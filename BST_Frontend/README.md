@@ -1,4 +1,4 @@
-## BST_Frontend (Next.js 15 + TS)
+## BST_Frontend (Next.js 16 + TS)
 
 ### What you need to install
 
@@ -19,14 +19,11 @@ npm -v
 cd .\BST_Frontend
 
 npm install
-npm install lucide-react@latest
-
-
 ```
 
 This installs:
 
-- next@15, react@19, react-dom@19
+- next@16, react@19, react-dom@19
 - lucide-react (icons)
 - typescript, eslint, @types/\* (dev)
 

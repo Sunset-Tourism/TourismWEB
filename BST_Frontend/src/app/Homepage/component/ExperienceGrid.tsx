@@ -1,4 +1,3 @@
-import HomeCard from "./HomeCard";
 import Image from "next/image";
 
 const experiences = [

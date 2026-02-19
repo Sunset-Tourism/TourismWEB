@@ -4,7 +4,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../../../components/ui/card";
-import { Landmark, Castle, Mountain } from "lucide-react";
 import { ReactNode } from "react";
 
 interface DestinationCardProps {
