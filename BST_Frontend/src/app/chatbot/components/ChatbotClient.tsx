@@ -4,6 +4,7 @@ import { ChatMessage } from "@/types/chatbot";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
 import { Card } from "@/components/ui/card";
+import { apiPost } from "@/lib/api";
 
 export function ChatbotClient() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -14,8 +15,9 @@ export function ChatbotClient() {
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
     try {
-      const res = await fetch("/api/chatbot", { method: "POST" });
-      const data = await res.json();
+      const data = await apiPost<{ reply: string }>("/chatbot", {
+        message: text,
+      });
       const botMsg: ChatMessage = { role: "assistant", content: data.reply };
       setMessages((prev) => [...prev, botMsg]);
     } catch {

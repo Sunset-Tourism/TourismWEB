@@ -44,6 +44,26 @@ npm run build
 npm run start
 ```
 
+### Deploy to Netlify
+
+This frontend is already configured for Netlify via `netlify.toml` and `@netlify/plugin-nextjs`.
+
+1. Push your code to GitHub/GitLab/Bitbucket.
+2. In Netlify, create a new site from your repo.
+3. If your repo root is `TourismWEB`, set **Base directory** to `BST_Frontend`.
+4. Keep build settings as:
+   - Build command: `npm run build`
+   - Publish directory: leave empty (handled by Next.js plugin)
+5. Add environment variables in Netlify:
+   - `NEXT_PUBLIC_API_URL` = your backend API base URL (example: `https://your-backend-domain/api`)
+6. Deploy.
+
+For local verification before deploy:
+
+```powershell
+npm run build
+```
+
 ### Project structure highlights
 
 - `src/app/layout.tsx`: Global layout (sidebar, topbar, footer)
