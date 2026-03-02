@@ -1,180 +1,329 @@
 "use client";
 
 import React from "react";
-import { InteractiveMap } from "./components/interactivemap";
+import { MapPin, Calendar, Bus, Compass, Sparkles } from "lucide-react";
+import { InteractiveMap, type MapMarker } from "./components/interactivemap";
 import { FeatureSection } from "./components/featuresection";
 import { DestinationCard } from "./components/destinationcard";
 import { ActionButton } from "./components/actionbutton";
-import { MapPin, Calendar, Bus, Compass, Sparkles } from "lucide-react";
-import "./explore.css"; // Import explore-specific CSS
-import "./components/leaflet-setup.css";
-import { motion, Variants } from "framer-motion";
 
-export default function HomePage() {
-  const popularDestinations = [
-    {
-      title: "Tiger's Nest Monastery",
-      location: "Paro, Bhutan",
-      description: "A sacred Buddhist site perched on a cliffside",
-      image:
-        "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800&q=80",
-      rating: 4.9,
-      reviews: 1234,
-    },
-    {
-      title: "Punakha Dzong",
-      location: "Punakha, Bhutan",
-      description: "The palace of great happiness and bliss",
-      image:
-        "https://images.unsplash.com/photo-1587986825883-bc00b6a6033c?w=800&q=80",
-      rating: 4.8,
-      reviews: 892,
-    },
-    {
-      title: "Thimphu Valley",
-      location: "Thimphu, Bhutan",
-      description: "The capital city surrounded by mountains",
-      image:
-        "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80",
-      rating: 4.7,
-      reviews: 1567,
-    },
-  ];
+interface Destination {
+  title: string;
+  location: string;
+  description: string;
+  image: string;
+  rating: number;
+  reviews: number;
+  position: [number, number];
+}
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
+const destinations: Destination[] = [
+  {
+    title: "Tiger's Nest Monastery",
+    location: "Paro, Bhutan",
+    description: "A sacred Buddhist site perched on the cliffside",
+    image: "/parotaktsang.jpg",
+    rating: 4.9,
+    reviews: 1234,
+    position: [27.4927, 89.3639],
+  },
+  {
+    title: "Punakha Dzong",
+    location: "Punakha, Bhutan",
+    description: "The palace of great happiness and bliss",
+    image: "/punakhadzong.webp",
+    rating: 4.8,
+    reviews: 892,
+    position: [27.5919, 89.8636],
+  },
+  {
+    title: "Thimphu Valley",
+    location: "Thimphu, Bhutan",
+    description: "The capital city surrounded by gentle mountains",
+    image: "/Thimphuvalley.webp",
+    rating: 4.7,
+    reviews: 1567,
+    position: [27.4728, 89.639],
+  },
+];
 
-  const itemVariants: Variants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
+const featureCards = [
+  {
+    icon: <MapPin className="h-5 w-5" />,
+    title: "Popular places",
+    description: "See the core highlights of Bhutan without endless scrolling.",
+  },
+  {
+    icon: <Calendar className="h-5 w-5" />,
+    title: "Festivals",
+    description: "Keep track of major cultural events before you travel.",
+  },
+  {
+    icon: <Bus className="h-5 w-5" />,
+    title: "Simple routing",
+    description: "Know how to get around with buses, taxis, and guides.",
+  },
+];
+
+const heroStats = [
+  {
+    label: "Destinations",
+    value: "30+",
+    detail: "Curated pins",
+  },
+  {
+    label: "Culture spots",
+    value: "18",
+    detail: "Monasteries & dzongs",
+  },
+  {
+    label: "Avg. rating",
+    value: "4.8",
+    detail: "Traveler reviews",
+  },
+];
+
+const planningSteps = [
+  {
+    title: "Pick a region",
+    detail: "Use the map pins to choose a valley or city you want to visit.",
+  },
+  {
+    title: "Add activities",
+    detail: "Mark the monasteries, hikes, or markets you care about most.",
+  },
+  {
+    title: "Plan travel",
+    detail: "Note transport and lodging so the trip stays relaxed and simple.",
+  },
+];
+
+const journeyOutline = [
+  {
+    window: "Days 1-2",
+    title: "Acclimate in Thimphu",
+    detail: "Markets, artisan cafés, and the Buddha Dordenma ridge walk.",
+  },
+  {
+    window: "Days 3-4",
+    title: "Dochula to Punakha",
+    detail: "Stop at 108 chortens, then float down to the Mo Chhu valley.",
+  },
+  {
+    window: "Day 5",
+    title: "Punakha slow morning",
+    detail: "Trail the rice terraces and cross the suspension bridge.",
+  },
+  {
+    window: "Days 6-7",
+    title: "Haa / Bumthang",
+    detail: "Pick alpine homestays or pine forest treks before departing.",
+  },
+];
+
+const mapToggles = ["Festivals", "Homestays", "Trek routes", "Transit hubs"];
+
+const mapMarkers: MapMarker[] = destinations.map((destination, index) => ({
+  id: `destination-${index}`,
+  title: destination.title,
+  position: destination.position,
+  description: destination.description,
+}));
+
+const mapHighlights = [
+  {
+    title: "Valley layers",
+    detail: "Pins cluster by region so distance is obvious at a glance.",
+  },
+  {
+    title: "Drive arcs",
+    detail: "Soft bands mark two- and four-hour stretches to keep pace gentle.",
+  },
+  {
+    title: "Offline cache",
+    detail: "Map stays visible when you lose signal on the mountain passes.",
+  },
+];
+
+export default function ExplorePage() {
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % planningSteps.length);
+    }, 2000);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
-    <div className="homepage">
-      {/* Hero Section (updated) */}
-      <section className="explore-hero">
-        <div className="explore-hero__bg" aria-hidden="true" />
-        <div className="explore-hero__pattern" aria-hidden="true" />
-        <motion.div
-          className="explore-hero__inner"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <motion.div
-            className="explore-hero__badge"
-            initial={{ scale: 0.85, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            <Sparkles className="explore-hero__badge-icon" />
-            <span>Discover Bhutan</span>
-          </motion.div>
-
-          <h1 className="explore-hero__title">Explore Bhutan Interactively</h1>
-          <p className="explore-hero__subtitle">
-            Real-time insights on attractions, sacred sites, festivals and
-            travel routes
-          </p>
-
-          <div className="explore-hero__actions">
-            <ActionButton icon={<Compass />} text="Explore Attractions" />
-            <ActionButton icon={<Calendar />} text="View Festivals" outline />
-            <ActionButton icon={<Bus />} text="Transportation" outline />
+    <div className="bg-white text-slate-900">
+      <section className="hero-explore">
+        <div className="hero-pattern" aria-hidden="true" />
+        <div className="hero-content-wrapper">
+          <div className="hero-badge">
+            <Sparkles className="h-4 w-4 text-[#f97316]" />
+            Planning studio
           </div>
-        </motion.div>
+          <h1>Explore Bhutan the simple way</h1>
+          <p className="hero-description">
+            Every destination and travel note starts with the map. Pinpoint a
+            place, read a short description, and keep your planning calm and
+            focused.
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <ActionButton
+              icon={<Compass className="h-4 w-4" />}
+              text="Start exploring"
+            />
+            <ActionButton
+              icon={<Calendar className="h-4 w-4" />}
+              text="Festivals"
+              outline
+            />
+            <ActionButton
+              icon={<Bus className="h-4 w-4" />}
+              text="Travel options"
+              outline
+            />
+          </div>
+          <div className="hero-stats">
+            {heroStats.map((stat, index) => (
+              <React.Fragment key={stat.label}>
+                <div className="stat-badge text-center">
+                  <span className="stat-value">{stat.value}</span>
+                  <span className="stat-label">{stat.label}</span>
+                  <span className="text-xs text-slate-400">{stat.detail}</span>
+                </div>
+                {index < heroStats.length - 1 && (
+                  <span className="stat-divider" aria-hidden="true" />
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
       </section>
 
-      {/* Interactive Map Section */}
-      <motion.section
-        className="map-section"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <InteractiveMap />
-      </motion.section>
+      <section className="explore-map-band">
+        <div className="section-header section-header--compact">
+          <p>Map-first planning</p>
+          <h2>See valleys, dzongs, and drive times together</h2>
+          <p>
+            Use the interactive map to anchor your ideas, then keep the cadence
+            card and outline to the side so nothing feels rushed.
+          </p>
+        </div>
+        <div className="map-band-inner">
+          <div className="map-panel">
+            <div className="map-panel__viewport">
+              <InteractiveMap markers={mapMarkers} />
+            </div>
+            <div className="map-panel__caption">
+              <p>
+                Pins show the main monasteries and valleys so you can orient
+                yourself from the very start. Zoom to reveal more intimate
+                homestays.
+              </p>
+              <ul className="map-highlight-list">
+                {mapHighlights.map((highlight) => (
+                  <li key={highlight.title}>
+                    <h4>{highlight.title}</h4>
+                    <p>{highlight.detail}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="map-info-panel">
+            <div className="map-info-card">
+              <p className="map-info-card__label">Planning cadence</p>
+              <h3>Keep it to three beats</h3>
+              <p>Let the rhythm be region, activity, then travel logistics.</p>
+              <div className="step-slider" aria-live="polite">
+                {planningSteps.map((step, index) => (
+                  <div
+                    key={step.title}
+                    className={`step-item step-item--slider${
+                      index === activeStep ? " is-active" : ""
+                    }`}
+                    aria-hidden={index !== activeStep}
+                  >
+                    <h4>{step.title}</h4>
+                    <p>{step.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="map-info-card">
+              <p className="map-info-card__label">Journey outline</p>
+              <h3>Seven calm days</h3>
+              <p>Tap a row to highlight the pins for that window.</p>
+              <ol className="itinerary-list">
+                {journeyOutline.map((stop) => (
+                  <li key={stop.title}>
+                    <span className="itinerary-window">{stop.window}</span>
+                    <span className="itinerary-title">{stop.title}</span>
+                    <span className="itinerary-detail">{stop.detail}</span>
+                  </li>
+                ))}
+              </ol>
+              <div className="map-toggles">
+                {mapToggles.map((toggle) => (
+                  <button
+                    key={toggle}
+                    type="button"
+                    className="map-toggle-pill"
+                  >
+                    {toggle}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Features Section */}
-      <motion.section
-        className="features"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <motion.div variants={itemVariants}>
-          <FeatureSection
-            icon={<MapPin />}
-            title="Popular Destinations"
-            description="Discover the most visited and iconic places in Bhutan"
-            color="#2b6777"
-          />
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <FeatureSection
-            icon={<Calendar />}
-            title="Festivals & Events"
-            description="Stay updated with cultural festivals and events"
-            color="#c8553d"
-          />
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <FeatureSection
-            icon={<Bus />}
-            title="Transportation"
-            description="Real-time transport routes and schedules"
-            color="#52ab98" // updated accent
-          />
-        </motion.div>
-      </motion.section>
-
-      {/* Popular Destinations Section */}
-      <section className="destinations">
-        <motion.div
-          className="destinations-header"
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <h2>Popular Destinations</h2>
-          <p>Hand-picked locations that showcase the beauty of Bhutan</p>
-        </motion.div>
-
-        <motion.div
-          className="destination-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {popularDestinations.map((destination, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <DestinationCard
-                title={destination.title}
-                location={destination.location}
-                description={destination.description}
-                image={destination.image}
-                rating={destination.rating}
-                reviews={destination.reviews}
-                onExplore={() => alert(`Exploring ${destination.title}`)}
-              />
-            </motion.div>
+      <section className="features-wrapper">
+        <div className="section-header">
+          <p>Highlights</p>
+          <h2>Quick things to know</h2>
+          <p>
+            Just three cards that explain how to use this page—no extra panels
+            or tabs.
+          </p>
+        </div>
+        <div className="features">
+          {featureCards.map((feature) => (
+            <FeatureSection
+              key={feature.title}
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+            />
           ))}
-        </motion.div>
+        </div>
+      </section>
+
+      <section className="map-section-wrapper">
+        <div className="destinations-header">
+          <p>Destinations</p>
+          <h2>Places worth bookmarking</h2>
+          <p>A short list of highlights so the page stays light.</p>
+        </div>
+        <div className="destination-grid">
+          {destinations.map((destination) => (
+            <DestinationCard
+              key={destination.title}
+              title={destination.title}
+              location={destination.location}
+              description={destination.description}
+              image={destination.image}
+              rating={destination.rating}
+              reviews={destination.reviews}
+              onExplore={() => alert(`Exploring ${destination.title}`)}
+            />
+          ))}
+        </div>
       </section>
     </div>
   );
