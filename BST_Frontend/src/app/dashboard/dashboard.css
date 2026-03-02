@@ -53,7 +53,8 @@
   background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
   padding: 2rem 2.5rem;
   border-radius: 24px;
-  box-shadow: 0 10px 40px rgba(43, 103, 119, 0.12),
+  box-shadow:
+    0 10px 40px rgba(43, 103, 119, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   border: 2px solid rgba(82, 171, 152, 0.1);
   position: relative;
@@ -147,7 +148,8 @@
   border: 2px solid rgba(82, 171, 152, 0.1);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(43, 103, 119, 0.1),
+  box-shadow:
+    0 8px 32px rgba(43, 103, 119, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -186,7 +188,8 @@
 
 .dashboard-stat-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(43, 103, 119, 0.18),
+  box-shadow:
+    0 20px 60px rgba(43, 103, 119, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   border-color: var(--color-accent);
 }
@@ -284,7 +287,8 @@
   background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(43, 103, 119, 0.1),
+  box-shadow:
+    0 8px 32px rgba(43, 103, 119, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   position: relative;
   overflow: hidden;
@@ -394,7 +398,8 @@
   border-color: var(--color-accent);
   background: linear-gradient(135deg, #ffffff, rgba(82, 171, 152, 0.05));
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 16px 48px rgba(43, 103, 119, 0.18),
+  box-shadow:
+    0 16px 48px rgba(43, 103, 119, 0.18),
     inset 0 0 0 1px rgba(82, 171, 152, 0.2);
 }
 
@@ -577,32 +582,250 @@
 }
 
 .dashboard-destination-view-btn {
-  background: linear-gradient(
-    135deg,
-    var(--color-accent),
-    var(--color-primary)
-  );
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(82, 171, 152, 0.25);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.dashboard-destination-view-btn:hover {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background: linear-gradient(
     135deg,
     var(--color-primary),
     var(--color-accent)
   );
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 8px 24px rgba(43, 103, 119, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-destination-view-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.35),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.dashboard-destination-view-btn span,
+.dashboard-destination-view-btn svg {
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-destination-view-btn:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 16px 38px rgba(43, 103, 119, 0.35);
+}
+
+.dashboard-destination-view-btn:hover::after {
+  opacity: 1;
+}
+
+.dashboard-destination-view-btn:focus-visible {
+  outline: 3px solid rgba(82, 171, 152, 0.45);
+  outline-offset: 3px;
+}
+
+/* Bhutan Progress Section */
+.bhutan-progress-section {
+  margin-bottom: 2.5rem;
+  background: linear-gradient(135deg, #ffffff, #f8fcff);
+  border-radius: 24px;
+  padding: 2rem;
+  border: 2px solid rgba(82, 171, 152, 0.1);
+  box-shadow: 0 8px 32px rgba(43, 103, 119, 0.08);
+}
+
+.bhutan-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.bhutan-progress-card {
+  border-radius: 18px;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(245, 251, 255, 0.9), #ffffff);
+  border: 2px solid rgba(82, 171, 152, 0.15);
+}
+
+.bhutan-progress-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #5a7c8a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bhutan-progress-value {
+  margin: 0 0 0.75rem;
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.bhutan-progress-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(82, 171, 152, 0.15);
+  overflow: hidden;
+}
+
+.bhutan-progress-bar div {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  box-shadow: 0 3px 12px rgba(82, 171, 152, 0.35);
+}
+
+.bhutan-progress-caption {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #5a7c8a;
+}
+
+.section-highlight {
+  border-color: rgba(82, 171, 152, 0.45) !important;
+  box-shadow:
+    0 0 0 3px rgba(82, 171, 152, 0.15),
+    0 20px 48px rgba(43, 103, 119, 0.18);
+  animation: sectionGlow 1.4s ease-out;
+}
+
+.action-prompt-banner {
+  margin: 0 0 1rem;
+  padding: 0.85rem 1.2rem;
+  border-radius: 14px;
+  background: rgba(82, 171, 152, 0.12);
+  border: 1px dashed rgba(82, 171, 152, 0.4);
+  font-weight: 700;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@keyframes sectionGlow {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(82, 171, 152, 0.2),
+      0 12px 32px rgba(43, 103, 119, 0.12);
+  }
+  100% {
+    box-shadow:
+      0 0 0 3px rgba(82, 171, 152, 0.15),
+      0 20px 48px rgba(43, 103, 119, 0.18);
+  }
+}
+
+/* Journey Log */
+.journey-log-intro {
+  margin: 0 0 1.25rem;
+  color: #4b6b78;
+  font-weight: 500;
+}
+
+.journey-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.journey-log-item {
+  border-radius: 18px;
+  padding: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(82, 171, 152, 0.1),
+    rgba(82, 171, 152, 0.03)
+  );
+  border: 2px solid rgba(82, 171, 152, 0.15);
+  box-shadow: 0 4px 18px rgba(43, 103, 119, 0.08);
+}
+
+.journey-log-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.journey-log-place {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.journey-log-district {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #5a7c8a;
+}
+
+.journey-view-btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(43, 103, 119, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.journey-view-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(43, 103, 119, 0.35);
+}
+
+.journey-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin: 1rem 0;
+}
+
+.journey-distance,
+.journey-elevation,
+.journey-mood {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  border: 1px solid rgba(82, 171, 152, 0.2);
+}
+
+.journey-overview {
+  margin: 0;
+  color: #4b6b78;
+  font-size: 0.95rem;
 }
 
 /* Activity Grid - Enhanced */
@@ -699,6 +922,282 @@
   font-weight: 500;
 }
 
+/* Reward + Perspective */
+.reward-card {
+  background: linear-gradient(135deg, #fff8ef, #fdf3e4);
+  border-color: rgba(250, 164, 58, 0.35);
+}
+
+.reward-card-description {
+  margin: 0 0 1.25rem;
+  font-weight: 600;
+  color: #a5631b;
+}
+
+.reward-ideas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.reward-idea-card {
+  padding: 1.25rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(250, 164, 58, 0.25);
+  box-shadow: 0 4px 18px rgba(250, 164, 58, 0.15);
+}
+
+.reward-idea-title {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #a5631b;
+}
+
+.reward-idea-points {
+  margin: 0;
+  font-weight: 900;
+  color: #f97316;
+}
+
+.reward-idea-impact {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: #7a4f1e;
+}
+
+.perspective-card {
+  background: linear-gradient(135deg, #f0fffe, #e4f6ff);
+  border-color: rgba(82, 171, 152, 0.35);
+}
+
+.perspective-intro {
+  margin: 0 0 1rem;
+  font-weight: 600;
+  color: #2b6777;
+}
+
+.perspective-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.perspective-pill {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: rgba(82, 171, 152, 0.15);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  border: 1px solid rgba(82, 171, 152, 0.3);
+}
+
+.perspective-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #356072;
+  line-height: 1.5;
+}
+
+/* Impact Highlights */
+.impact-card {
+  background: linear-gradient(135deg, #f0fffa, #e3fbf2);
+  border-color: rgba(82, 171, 152, 0.35);
+}
+
+.impact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.impact-item {
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(82, 171, 152, 0.2);
+}
+
+.impact-title {
+  margin: 0;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.impact-detail {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: #49707f;
+}
+
+/* Journey Insight Modal */
+.journey-insight-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 32, 43, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 50;
+}
+
+.journey-insight-panel {
+  background: #fff;
+  border-radius: 24px;
+  width: min(420px, 100%);
+  padding: 1.75rem;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(8, 32, 43, 0.28);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.journey-insight-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: rgba(239, 246, 245, 0.9);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.journey-insight-eyebrow {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #5a7c8a;
+}
+
+.journey-insight-title {
+  margin: 0.35rem 0 0;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.journey-insight-district {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #5a7c8a;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.journey-insight-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.journey-insight-tags span {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(82, 171, 152, 0.1);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.journey-insight-overview {
+  margin: 0 0 1rem;
+  color: #4b6b78;
+}
+
+.journey-insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.journey-insight-label {
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #5a7c8a;
+}
+
+.journey-insight-value {
+  margin: 0.2rem 0 0;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.journey-insight-list {
+  margin: 0.35rem 0 0;
+  padding-left: 1.25rem;
+  color: #4b6b78;
+}
+
+.journey-insight-note {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 16px;
+  background: rgba(82, 171, 152, 0.06);
+  border: 1px solid rgba(82, 171, 152, 0.2);
+}
+
+.journey-insight-photos {
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.journey-insight-photo {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(82, 171, 152, 0.25);
+  min-height: 120px;
+  background: rgba(82, 171, 152, 0.08);
+}
+
+.journey-insight-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.journey-insight-photo-placeholder {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: #2b6777;
+  font-weight: 700;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.journey-insight-photo-placeholder small {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #4b6b78;
+}
+
+@media (max-width: 540px) {
+  .journey-insight-panel {
+    padding: 1.25rem;
+    border-radius: 18px;
+  }
+}
+
 /* Alerts Container */
 .dashboard-alerts-container {
   display: flex;
@@ -733,7 +1232,8 @@
     rgba(82, 171, 152, 0.05)
   );
   border: 2px solid var(--color-accent);
-  box-shadow: 0 6px 24px rgba(82, 171, 152, 0.2),
+  box-shadow:
+    0 6px 24px rgba(82, 171, 152, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
@@ -746,7 +1246,8 @@
 
 .dashboard-achievement-badge:hover.earned {
   transform: translateY(-12px) scale(1.05);
-  box-shadow: 0 20px 48px rgba(82, 171, 152, 0.35),
+  box-shadow:
+    0 20px 48px rgba(82, 171, 152, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
@@ -866,7 +1367,8 @@
   background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
   border-radius: 999px;
   transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 20px rgba(82, 171, 152, 0.5),
+  box-shadow:
+    0 0 20px rgba(82, 171, 152, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
   position: relative;
 }
@@ -901,7 +1403,8 @@
   background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(43, 103, 119, 0.1),
+  box-shadow:
+    0 8px 32px rgba(43, 103, 119, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   border: 2px solid rgba(82, 171, 152, 0.1);
   position: relative;
@@ -946,6 +1449,11 @@
 .dashboard-quick-action-btn:hover {
   transform: translateY(-8px) scale(1.05);
   box-shadow: 0 16px 48px rgba(43, 103, 119, 0.35);
+}
+
+.dashboard-quick-action-btn:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 3px;
 }
 
 .dashboard-quick-action-icon {
@@ -1041,6 +1549,15 @@
     min-width: 120px;
   }
 
+  .bhutan-progress-grid,
+  .reward-ideas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .perspective-list {
+    flex-direction: column;
+  }
+
   .dashboard-achievements-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1050,13 +1567,102 @@
   }
 }
 
+@media (max-width: 640px) {
+  .dashboard-container {
+    padding: 1.25rem 0.85rem 1.5rem;
+  }
+
+  .dashboard-header-content {
+    padding: 1.25rem;
+  }
+
+  .dashboard-stats-grid,
+  .dashboard-content-grid,
+  .dashboard-activity-grid {
+    gap: 1.25rem;
+  }
+
+  .dashboard-stat-card,
+  .dashboard-chart-card,
+  .dashboard-side-card,
+  .bhutan-progress-section,
+  .dashboard-quick-actions-card {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .bhutan-progress-grid {
+    gap: 1rem;
+  }
+
+  .dashboard-card-title {
+    font-size: 1.2rem;
+  }
+
+  .journey-log-item {
+    padding: 1.25rem;
+  }
+
+  .journey-log-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .journey-view-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .journey-metrics {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .dashboard-quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-quick-action-btn {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.25rem;
+    min-height: 72px;
+  }
+
+  .dashboard-quick-action-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .dashboard-time {
+    padding: 0.85rem 1rem;
+  }
+
+  .journey-insight-grid,
+  .journey-insight-photos {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 480px) {
+  .dashboard-container {
+    padding: 1rem 0.75rem 1.25rem;
+  }
+
   .dashboard-title {
     font-size: 1.75rem;
   }
 
   .dashboard-subtitle {
     font-size: 0.95rem;
+  }
+
+  .dashboard-card-title {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
   }
 
   .dashboard-achievements-grid {
@@ -1078,5 +1684,25 @@
 
   .dashboard-stat-value {
     font-size: 2rem;
+  }
+
+  .journey-log-item {
+    padding: 1rem;
+  }
+
+  .journey-view-btn {
+    font-size: 0.85rem;
+  }
+
+  .journey-metrics {
+    gap: 0.4rem;
+  }
+
+  .dashboard-quick-action-btn {
+    padding: 1rem;
+  }
+
+  .journey-insight-panel {
+    padding: 1rem;
   }
 }

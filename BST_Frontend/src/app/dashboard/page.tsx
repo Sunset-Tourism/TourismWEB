@@ -1,179 +1,230 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   MapPin,
-  Calendar,
-  Heart,
-  Clock,
-  Star,
-  Plane,
-  Camera,
+  Navigation,
   Award,
   TrendingUp,
-  Bookmark,
-  Users,
-  Navigation,
-  X,
+  Camera,
 } from "lucide-react";
 import "./dashboard.css"; // Import dashboard-specific CSS
 
+type SectionKey = "journey" | "progress";
+
+type ActionPrompt = {
+  section: SectionKey;
+  message: string;
+};
+
+type QuickActionColor = "blue" | "green" | "purple" | "orange";
+
+type QuickActionConfig = {
+  label: string;
+  color: QuickActionColor;
+  icon: React.ReactNode;
+  section: SectionKey;
+  prompt: string;
+};
+
 export default function DashboardPage() {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [selectedInsight, setSelectedInsight] = useState<number | null>(null);
   const [userStats] = useState({
-    tripsCompleted: 12,
-    countriesVisited: 8,
-    upcomingTrips: 3,
+    bhutanPlaces: 18,
+    bhutanDzongs: 9,
+    bhutanDistance: 486,
     rewardPoints: 2450,
+    districtsCovered: 6,
   });
-  const [selectedDestination, setSelectedDestination] = useState<number | null>(
-    null
-  );
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const upcomingTrips = [
+  const [highlightedSection, setHighlightedSection] = useState<SectionKey | null>(null);
+  const [actionPrompt, setActionPrompt] = useState<ActionPrompt | null>(null);
+  const highlightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const journeyLogRef = useRef<HTMLDivElement | null>(null);
+  const progressSectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (highlightTimerRef.current) {
+        clearTimeout(highlightTimerRef.current);
+      }
+    };
+  }, []);
+  const mindfulProgress = [
+    { label: "District coverage", current: userStats.districtsCovered, goal: 20 },
+    { label: "Sacred sites journaled", current: 14, goal: 30 },
+    { label: "Nature treks logged", current: 9, goal: 18 },
+  ];
+
+  const formatDistance = (distanceKm: number) => {
+    if (distanceKm >= 100) {
+      return `${distanceKm.toLocaleString()} km`;
+    }
+    return `${distanceKm.toFixed(1)} km`;
+  };
+
+  const bhutanJourney = [
     {
-      id: "TR001",
-      destination: "Paris, France",
-      startDate: "2024-02-15",
-      endDate: "2024-02-22",
-      status: "confirmed",
-      image: "/paris.jpg",
-      daysLeft: 12,
+      place: "Paro Taktsang",
+      district: "Paro",
+      distanceKm: 6.4,
+      elevation: "3,120 m cliffside",
+      mood: "Sunrise pilgrimage",
+      overview:
+        "Tracked ascent time, rest points, and prayer flag stops to compare stamina across seasons.",
+      insight: {
+        bestSeason: "March - May for clear ridgelines",
+        essentials: ["Hydration tabs", "Prayer scarf", "Layered fleece"],
+        rewardUse: "Redeem 320 pts for a local porter or mule service at the base camp.",
+        community:
+          "Donated notebooks to nearby Shari village school—log keeps contact info + follow-ups.",
+        photos: [
+          { label: "Taktsang ridge overlook", src: undefined },
+          { label: "Prayer flag checkpoint", src: undefined },
+        ],
+      },
     },
     {
-      id: "TR002",
-      destination: "Tokyo, Japan",
-      startDate: "2024-03-10",
-      endDate: "2024-03-18",
-      status: "pending",
-      image: "/tokyo.jpg",
-      daysLeft: 35,
+      place: "Dochula → Punakha",
+      district: "Thimphu & Punakha",
+      distanceKm: 51.2,
+      elevation: "3,100 m mountain pass",
+      mood: "Cloud-forest drive",
+      overview:
+        "Recorded cloud cover, Druk Wangyel chorten visits, and river levels entering Punakha valley.",
+      insight: {
+        bestSeason: "Oct - Dec for Himalayan vistas",
+        essentials: ["Prayer flags", "Wide-angle lens", "Thermal flask"],
+        rewardUse: "Use 600 pts for a tea ceremony + guide inside Punakha Dzong.",
+        community:
+          "Planted two saplings via Royal Botanical Park volunteer drive; reminders stored in app.",
+        photos: [
+          { label: "Dochula chortens", src: undefined },
+          { label: "Punakha Dzong bridge", src: undefined },
+        ],
+      },
     },
     {
-      id: "TR003",
-      destination: "Bali, Indonesia",
-      startDate: "2024-04-05",
-      endDate: "2024-04-12",
-      status: "confirmed",
-      image: "/bali.jpg",
-      daysLeft: 61,
+      place: "Gangtey Nature Trail",
+      district: "Wangdue",
+      distanceKm: 4.1,
+      elevation: "2,900 m wetlands",
+      mood: "Crane migration journal",
+      overview:
+        "Pinned black-necked crane sightings with timestamps and shared with local conservation club.",
+      insight: {
+        bestSeason: "Nov - Feb when cranes roost",
+        essentials: ["Binoculars", "Soft-soled shoes", "Windproof shell"],
+        rewardUse: "Redeem 450 pts for eco-guide from Gangtey Monastery youth group.",
+        community:
+          "Support Gangtey school canteen—app tracks contribution receipts + next visit dates.",
+        photos: [
+          { label: "Black-necked cranes", src: undefined },
+          { label: "Valley boardwalk", src: undefined },
+        ],
+      },
+    },
+    {
+      place: "Bumthang Cultural Circuit",
+      district: "Bumthang",
+      distanceKm: 160,
+      elevation: "2,600 m valleys",
+      mood: "Heritage immersion",
+      overview:
+        "Linked Kurje, Tamshing, and textile studios into one narrative thread with audio notes.",
+      insight: {
+        bestSeason: "Sept tshechu festivals",
+        essentials: ["Audio recorder", "Kira fabric samples", "Light rain jacket"],
+        rewardUse:
+          "Apply 1,050 pts toward a farmhouse stay with hot stone bath + local guide.",
+        community:
+          "Documented artisans to revisit for custom weaves; contact list synced to dashboard.",
+        photos: [
+          { label: "Kurje Lhakhang courtyard", src: undefined },
+          { label: "Bumthap farmhouse stay", src: undefined },
+        ],
+      },
     },
   ];
 
-  const savedDestinations = [
+  const impactHighlights = [
     {
-      name: "Paro Taktsang (Tiger's Nest)",
-      saves: "3.2k travelers",
-      images: [
-        "/tigers-nest-1.jpg",
-        "/tigers-nest-2.jpg",
-        "/tigers-nest-3.jpg",
-      ],
-      description:
-        "Perched dramatically on a cliff 900m above Paro valley, this iconic monastery is Bhutan's most revered spiritual site. The challenging hike rewards visitors with breathtaking views and profound spiritual atmosphere.",
-      highlights: [
-        "Sacred Monastery",
-        "Cliff-side Hike",
-        "Panoramic Views",
-        "Buddhist Heritage",
-      ],
+      title: "Community connections",
+      detail: "4 host families logged with contact reminders for return journeys.",
     },
     {
-      name: "Punakha Dzong",
-      saves: "2.8k travelers",
-      images: ["/punakha-1.jpg", "/punakha-2.jpg", "/punakha-3.jpg"],
-      description:
-        "The 'Palace of Great Happiness' stands majestically at the confluence of two rivers. This architectural masterpiece serves as the winter residence of the Je Khenpo and houses sacred relics.",
-      highlights: [
-        "Royal Palace",
-        "River Confluence",
-        "Jacaranda Gardens",
-        "Traditional Architecture",
-      ],
+      title: "Cultural gifts tracked",
+      detail: "12 butter-lamp offerings + school supplies recorded for future giving.",
     },
     {
-      name: "Thimphu Valley",
-      saves: "2.1k travelers",
-      images: ["/thimphu-1.jpg", "/thimphu-2.jpg", "/thimphu-3.jpg"],
-      description:
-        "Bhutan's capital seamlessly blends tradition with modernity. Explore the impressive Buddha Dordenma statue, bustling weekend markets, and traditional handicraft centers in this unique mountain city.",
-      highlights: [
-        "Buddha Dordenma",
-        "Weekend Market",
-        "National Memorial Chorten",
-        "City Life",
-      ],
-    },
-    {
-      name: "Phobjikha Valley",
-      saves: "1.5k travelers",
-      images: ["/phobjikha-1.jpg", "/phobjikha-2.jpg", "/phobjikha-3.jpg"],
-      description:
-        "A glacial valley of stunning natural beauty, famous for the endangered black-necked cranes that migrate here each winter. Experience pristine landscapes and authentic Bhutanese village life.",
-      highlights: [
-        "Black-necked Cranes",
-        "Valley Hikes",
-        "Gangtey Monastery",
-        "Rural Villages",
-      ],
+      title: "Wellness stats",
+      detail: "Avg 11,200 steps/day on treks with rest + acclimatization notes.",
     },
   ];
 
-  const recentActivity = [
+  const quickActions: QuickActionConfig[] = [
     {
-      type: "booking",
-      message: "Booked Paris Adventure Package",
-      time: "2 hours ago",
-      icon: "plane",
+      label: "Log new village",
+      color: "blue",
+      icon: <MapPin />,
+      section: "journey",
+      prompt:
+        "Journey log is ready—tap any View insight to capture the new village details.",
     },
     {
-      type: "review",
-      message: "Reviewed your trip to Dubai",
-      time: "1 day ago",
-      icon: "star",
+      label: "Track distance",
+      color: "green",
+      icon: <Navigation />,
+      section: "progress",
+      prompt: "Bhutan pulse is highlighted so you can append trek and drive totals.",
     },
     {
-      type: "save",
-      message: "Saved 'Swiss Alps Winter Tour'",
-      time: "3 days ago",
-      icon: "bookmark",
-    },
-  ];
-
-  const achievements = [
-    {
-      title: "Explorer",
-      description: "Visited 5+ countries",
-      earned: true,
-    },
-    {
-      title: "Adventure Seeker",
-      description: "Completed 10 trips",
-      earned: true,
-    },
-    {
-      title: "Early Bird",
-      description: "Book 3 months in advance",
-      earned: false,
-    },
-    {
-      title: "Photo Master",
-      description: "Upload 50+ photos",
-      earned: true,
+      label: "Add photo story",
+      color: "purple",
+      icon: <Camera />,
+      section: "journey",
+      prompt: "Open an insight in the journey log and drop your next photo story.",
     },
   ];
 
-  const travelPreferences = [
-    { category: "Beach", percentage: 65 },
-    { category: "Adventure", percentage: 45 },
-    { category: "Culture", percentage: 80 },
-    { category: "City", percentage: 55 },
-  ];
+  const scrollToSection = (section: SectionKey) => {
+    const targetElement =
+      section === "journey"
+        ? journeyLogRef.current
+        : progressSectionRef.current;
+
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const handleQuickAction = (action: QuickActionConfig) => {
+    scrollToSection(action.section);
+    setHighlightedSection(action.section);
+    setActionPrompt({ section: action.section, message: action.prompt });
+
+    if (highlightTimerRef.current) {
+      clearTimeout(highlightTimerRef.current);
+    }
+
+    highlightTimerRef.current = setTimeout(() => {
+      setHighlightedSection((current) =>
+        current === action.section ? null : current
+      );
+      setActionPrompt((current) =>
+        current?.section === action.section ? null : current
+      );
+    }, 2600);
+  };
+
+  const activeInsight =
+    selectedInsight !== null ? bhutanJourney[selectedInsight] : null;
 
   return (
     <div className="dashboard-container">
@@ -181,9 +232,10 @@ export default function DashboardPage() {
       <div className="dashboard-header">
         <div className="dashboard-header-content">
           <div>
-            <h1 className="dashboard-title">My Travel Dashboard</h1>
+            <h1 className="dashboard-title">Bhutan Travel Dashboard</h1>
             <p className="dashboard-subtitle">
-              Welcome back, Explorer! Plan your next adventure
+              Everything here is Bhutan-specific—district coverage, dzongs,
+              treks, and the reward wallet I use only within the country.
             </p>
           </div>
           <div className="dashboard-time">
@@ -198,257 +250,157 @@ export default function DashboardPage() {
       {/* User Stats Cards */}
       <div className="dashboard-stats-grid">
         <UserStatCard
-          title="Trips Completed"
-          value={userStats.tripsCompleted.toString()}
-          subtitle="This year"
-          icon={<Plane className="dashboard-card-icon" />}
-        />
-        <UserStatCard
-          title="Countries Visited"
-          value={userStats.countriesVisited.toString()}
-          subtitle="Lifetime"
+          title="Places logged"
+          value={`${userStats.bhutanPlaces} spots`}
+          subtitle={`${userStats.districtsCovered} districts covered`}
           icon={<MapPin className="dashboard-card-icon" />}
         />
         <UserStatCard
-          title="Upcoming Trips"
-          value={userStats.upcomingTrips.toString()}
-          subtitle="Next 6 months"
-          icon={<Calendar className="dashboard-card-icon" />}
+          title="Dzongs + monasteries"
+          value={userStats.bhutanDzongs.toString()}
+          subtitle="Documented with rituals + offerings"
+          icon={<TrendingUp className="dashboard-card-icon" />}
         />
         <UserStatCard
-          title="Reward Points"
+          title="Distance in Bhutan"
+          value={`${userStats.bhutanDistance} km`}
+          subtitle="Hikes + drives tracked"
+          icon={<Navigation className="dashboard-card-icon" />}
+        />
+        <UserStatCard
+          title="Reward points"
           value={userStats.rewardPoints.toLocaleString()}
-          subtitle="Available to redeem"
+          subtitle="Only for Bhutan experiences"
           icon={<Award className="dashboard-card-icon" />}
         />
       </div>
 
-      {/* Upcoming Trips & Saved Destinations */}
+      {/* Bhutan Progress Snapshot */}
+      <section
+        className={`bhutan-progress-section ${
+          highlightedSection === "progress" ? "section-highlight" : ""
+        }`}
+        ref={progressSectionRef}
+      >
+        <h2 className="dashboard-card-title">
+          <TrendingUp className="dashboard-card-icon" />
+          Bhutan pulse
+        </h2>
+        {actionPrompt?.section === "progress" && (
+          <div className="action-prompt-banner">{actionPrompt.message}</div>
+        )}
+        <div className="bhutan-progress-grid">
+          {mindfulProgress.map((metric) => {
+            const percent = Math.min(
+              Math.round((metric.current / metric.goal) * 100),
+              100
+            );
+            return (
+              <div key={metric.label} className="bhutan-progress-card">
+                <p className="bhutan-progress-label">{metric.label}</p>
+                <p className="bhutan-progress-value">
+                  {metric.current} / {metric.goal}
+                </p>
+                <div className="bhutan-progress-bar">
+                  <div style={{ width: `${percent}%` }} />
+                </div>
+                <span className="bhutan-progress-caption">
+                  {percent}% of personal goal
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       <div className="dashboard-content-grid">
-        {/* Upcoming Trips */}
-        <div className="dashboard-chart-card">
+        <div
+          className={`dashboard-chart-card ${
+            highlightedSection === "journey" ? "section-highlight" : ""
+          }`}
+          ref={journeyLogRef}
+        >
           <h2 className="dashboard-card-title">
-            <Calendar className="dashboard-card-icon" />
-            Upcoming Trips
+            <MapPin className="dashboard-card-icon" />
+            Bhutan journey log
           </h2>
-          <div className="dashboard-upcoming-trips-list">
-            {upcomingTrips.map((trip) => (
-              <div key={trip.id} className="dashboard-trip-card">
-                <div className="dashboard-trip-header">
-                  <div className="dashboard-trip-destination">
-                    <MapPin className="dashboard-trip-icon" />
-                    <h3>{trip.destination}</h3>
+          {actionPrompt?.section === "journey" && (
+            <div className="action-prompt-banner">{actionPrompt.message}</div>
+          )}
+          <p className="journey-log-intro">
+            Every entry is a Bhutan story—open an insight to view rituals,
+            essentials, and where reward points were used on the ground.
+          </p>
+          <div className="journey-log-list">
+            {bhutanJourney.map((entry, index) => (
+              <div key={entry.place} className="journey-log-item">
+                <div className="journey-log-header">
+                  <div>
+                    <p className="journey-log-place">{entry.place}</p>
+                    <p className="journey-log-district">{entry.district}</p>
                   </div>
-                  <span
-                    className={`dashboard-trip-status dashboard-status-${trip.status}`}
+                  <button
+                    className="journey-view-btn"
+                    onClick={() => setSelectedInsight(index)}
                   >
-                    {trip.status}
+                    View insight
+                  </button>
+                </div>
+                <div className="journey-metrics">
+                  <span className="journey-distance">
+                    {formatDistance(entry.distanceKm)} recorded
                   </span>
+                  <span className="journey-elevation">{entry.elevation}</span>
+                  <span className="journey-mood">{entry.mood}</span>
                 </div>
-                <div className="dashboard-trip-body">
-                  <div className="dashboard-trip-dates">
-                    <Clock className="dashboard-trip-icon-small" />
-                    <span>
-                      {trip.startDate} - {trip.endDate}
-                    </span>
-                  </div>
-                  <div className="dashboard-trip-countdown">
-                    <span className="dashboard-countdown-value">
-                      {trip.daysLeft}
-                    </span>
-                    <span className="dashboard-countdown-label">days left</span>
-                  </div>
-                </div>
+                <p className="journey-overview">{entry.overview}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Saved Destinations */}
-        <div className="dashboard-side-card">
-          <h2 className="dashboard-card-title">
-            <Heart className="dashboard-card-icon" />
-            Saved Destinations
-          </h2>
-          <div className="dashboard-destinations-list">
-            {savedDestinations.map((dest, i) => (
-              <div key={i} className="dashboard-destination-item">
-                <div className="dashboard-destination-info">
-                  <p className="dashboard-destination-name">{dest.name}</p>
-                  <p className="dashboard-destination-bookings">{dest.saves}</p>
-                </div>
-                <button
-                  className="dashboard-destination-view-btn"
-                  onClick={() => setSelectedDestination(i)}
-                >
-                  View
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
-      {/* Destination Preview Modal/Sidebar */}
-      {selectedDestination !== null && (
-        <div
-          className="destination-preview-overlay"
-          onClick={() => setSelectedDestination(null)}
-        >
-          <div
-            className="destination-preview-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="destination-preview-close"
-              onClick={() => setSelectedDestination(null)}
-              aria-label="Close preview"
-            >
-              <X size={20} />
-            </button>
-
-            <div className="destination-preview-header">
-              <h3>{savedDestinations[selectedDestination].name}</h3>
-              <p className="destination-preview-saves">
-                <Heart className="preview-heart-icon" fill="currentColor" />
-                {savedDestinations[selectedDestination].saves}
-              </p>
-            </div>
-
-            <div className="destination-preview-images">
-              {savedDestinations[selectedDestination].images.map((img, idx) => (
-                <div key={idx} className="destination-preview-image-wrapper">
-                  <div className="destination-preview-image-placeholder">
-                    <Camera size={40} strokeWidth={1.5} />
-                    <span className="image-label">Photo {idx + 1}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="destination-preview-description">
-              <h4>About This Destination</h4>
-              <p>{savedDestinations[selectedDestination].description}</p>
-            </div>
-
-            <div className="destination-preview-highlights">
-              <h4>Highlights & Activities</h4>
-              <div className="highlights-grid">
-                {savedDestinations[selectedDestination].highlights.map(
-                  (highlight, idx) => (
-                    <span key={idx} className="highlight-badge">
-                      <Star size={14} />
-                      {highlight}
-                    </span>
-                  )
-                )}
-              </div>
-            </div>
-
-            <div className="destination-preview-actions">
-              <button className="destination-preview-book-btn">
-                <Plane size={20} />
-                Book This Trip
-              </button>
-              <button className="destination-preview-save-btn">
-                <Bookmark size={20} />
-                Remove from Saved
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Activity & Achievements */}
       <div className="dashboard-activity-grid">
-        {/* Recent Activity */}
-        <div className="dashboard-side-card">
+        <div className="dashboard-side-card impact-card">
           <h2 className="dashboard-card-title">
-            <Clock className="dashboard-card-icon" />
-            Recent Activity
+            <TrendingUp className="dashboard-card-icon" />
+            Impact highlights
           </h2>
-          <div className="dashboard-activity-list">
-            {recentActivity.map((activity, i) => (
-              <div key={i} className="dashboard-activity-item">
-                <div className="dashboard-activity-icon-wrapper">
-                  {activity.icon === "plane" && (
-                    <Plane className="dashboard-activity-icon" />
-                  )}
-                  {activity.icon === "star" && (
-                    <Star className="dashboard-activity-icon" />
-                  )}
-                  {activity.icon === "bookmark" && (
-                    <Bookmark className="dashboard-activity-icon" />
-                  )}
-                </div>
-                <div className="dashboard-activity-details">
-                  <p className="dashboard-activity-message">
-                    {activity.message}
-                  </p>
-                  <p className="dashboard-activity-date">{activity.time}</p>
-                </div>
+          <div className="impact-list">
+            {impactHighlights.map((item) => (
+              <div key={item.title} className="impact-item">
+                <p className="impact-title">{item.title}</p>
+                <p className="impact-detail">{item.detail}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Achievements & Preferences */}
-        <div className="dashboard-alerts-container">
-          {/* Achievements */}
-          <div className="dashboard-side-card">
-            <h2 className="dashboard-card-title">
-              <Award className="dashboard-card-icon" />
-              Achievements
-            </h2>
-            <div className="dashboard-achievements-grid">
-              {achievements.map((achievement, i) => (
-                <div
-                  key={i}
-                  className={`dashboard-achievement-badge ${
-                    achievement.earned ? "earned" : "locked"
-                  }`}
-                >
-                  <Award className="dashboard-achievement-icon" />
-                  <div className="dashboard-achievement-info">
-                    <p className="dashboard-achievement-title">
-                      {achievement.title}
-                    </p>
-                    <p className="dashboard-achievement-desc">
-                      {achievement.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+        <div className="dashboard-side-card perspective-card">
+          <h2 className="dashboard-card-title">
+            <Navigation className="dashboard-card-icon" />
+            How I use this log
+          </h2>
+          <p className="perspective-intro">
+            This dashboard is purely for Bhutan: it lets me compare dzongs,
+            track distances, and see where points should go next.
+          </p>
+          <div className="perspective-list">
+            <span className="perspective-pill">
+              Bhutan-only stats + rituals remembered
+            </span>
+            <span className="perspective-pill">
+              Reward usage stays tied to local partners
+            </span>
+            <span className="perspective-pill">
+              Journey insights open as reference before each trip
+            </span>
           </div>
-
-          {/* Travel Preferences */}
-          <div className="dashboard-side-card">
-            <h2 className="dashboard-card-title">
-              <TrendingUp className="dashboard-card-icon" />
-              Travel Preferences
-            </h2>
-            <div className="dashboard-preferences-list">
-              {travelPreferences.map((pref, i) => (
-                <div key={i} className="dashboard-preference-item">
-                  <div className="dashboard-preference-header">
-                    <span className="dashboard-preference-name">
-                      {pref.category}
-                    </span>
-                    <span className="dashboard-preference-percent">
-                      {pref.percentage}%
-                    </span>
-                  </div>
-                  <div className="dashboard-preference-bar">
-                    <div
-                      className="dashboard-preference-fill"
-                      style={{ width: `${pref.percentage}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <p className="perspective-note">
+            Even if I travel elsewhere, I run a separate dashboard. This one is
+            dedicated to Bhutan so nothing competes with it.
+          </p>
         </div>
       </div>
 
@@ -456,28 +408,92 @@ export default function DashboardPage() {
       <div className="dashboard-quick-actions-card">
         <h2 className="dashboard-card-title">Quick Actions</h2>
         <div className="dashboard-quick-actions-grid">
-          <UserQuickAction
-            icon={<Navigation />}
-            label="Explore Destinations"
-            color="blue"
-          />
-          <UserQuickAction
-            icon={<Calendar />}
-            label="Plan New Trip"
-            color="green"
-          />
-          <UserQuickAction
-            icon={<Camera />}
-            label="Share Photos"
-            color="purple"
-          />
-          <UserQuickAction
-            icon={<Users />}
-            label="Invite Friends"
-            color="orange"
-          />
+          {quickActions.map((action) => (
+            <UserQuickAction
+              key={action.label}
+              icon={action.icon}
+              label={action.label}
+              color={action.color}
+              onClick={() => handleQuickAction(action)}
+            />
+          ))}
         </div>
       </div>
+
+      {activeInsight && (
+        <div className="journey-insight-overlay" onClick={() => setSelectedInsight(null)}>
+          <div
+            className="journey-insight-panel"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className="journey-insight-close"
+              onClick={() => setSelectedInsight(null)}
+              aria-label="Close insight"
+            >
+              ✕
+            </button>
+            <p className="journey-insight-eyebrow">Bhutan insight</p>
+            <h3 className="journey-insight-title">{activeInsight.place}</h3>
+            <p className="journey-insight-district">{activeInsight.district}</p>
+            <div className="journey-insight-tags">
+              <span>{formatDistance(activeInsight.distanceKm)}</span>
+              <span>{activeInsight.elevation}</span>
+              <span>{activeInsight.mood}</span>
+            </div>
+            <p className="journey-insight-overview">{activeInsight.overview}</p>
+
+            <div className="journey-insight-grid">
+              <div>
+                <p className="journey-insight-label">Best season</p>
+                <p className="journey-insight-value">
+                  {activeInsight.insight.bestSeason}
+                </p>
+              </div>
+              <div>
+                <p className="journey-insight-label">Recommended kit</p>
+                <ul className="journey-insight-list">
+                  {activeInsight.insight.essentials.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {activeInsight.insight.photos &&
+              activeInsight.insight.photos.length > 0 && (
+                <div className="journey-insight-photos">
+                  {activeInsight.insight.photos.map((photo) => (
+                    <div key={photo.label} className="journey-insight-photo">
+                      {photo.src ? (
+                        <img src={photo.src} alt={photo.label} />
+                      ) : (
+                        <div className="journey-insight-photo-placeholder">
+                          <Camera size={28} />
+                          <span>{photo.label}</span>
+                          <small>Drop an image URL later</small>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+            <div className="journey-insight-note">
+              <p className="journey-insight-label">Reward use</p>
+              <p className="journey-insight-value">
+                {activeInsight.insight.rewardUse}
+              </p>
+            </div>
+            <div className="journey-insight-note">
+              <p className="journey-insight-label">Community follow-up</p>
+              <p className="journey-insight-value">
+                {activeInsight.insight.community}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -505,13 +521,16 @@ function UserStatCard({ title, value, subtitle, icon }: UserStatCardProps) {
 type UserQuickActionProps = {
   icon: React.ReactNode;
   label: string;
-  color: "blue" | "green" | "purple" | "orange";
+  color: QuickActionColor;
+  onClick: () => void;
 };
 
-function UserQuickAction({ icon, label, color }: UserQuickActionProps) {
+function UserQuickAction({ icon, label, color, onClick }: UserQuickActionProps) {
   return (
     <button
       className={`dashboard-quick-action-btn dashboard-quick-action-${color}`}
+      onClick={onClick}
+      type="button"
     >
       <div className="dashboard-quick-action-icon">{icon}</div>
       <span className="dashboard-quick-action-label">{label}</span>

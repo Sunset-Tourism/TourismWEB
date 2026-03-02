@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import "../../../styles/globals.css";
+import React from "react";
 
 interface ActionButtonProps {
   icon: React.ReactNode;
@@ -9,59 +7,37 @@ interface ActionButtonProps {
 }
 
 export function ActionButton({ icon, text, outline }: ActionButtonProps) {
-  const [ripples, setRipples] = useState<
-    { x: number; y: number; id: number }[]
-  >([]);
+  const baseClasses =
+    "group relative inline-flex items-center gap-3 rounded-2xl border px-5 py-3 text-sm font-semibold tracking-tight transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 shadow-[0_14px_28px_rgba(2,6,23,0.22)]";
+  const filledClasses =
+    "bg-gradient-to-br from-slate-950/90 via-slate-900/80 to-slate-800/90 text-white border-white/15 hover:-translate-y-0.5 hover:shadow-[0_20px_35px_rgba(2,6,23,0.35)]";
+  const outlineClasses =
+    "bg-white/85 text-slate-900 border-white hover:-translate-y-0.5 hover:shadow-[0_18px_30px_rgba(15,23,42,0.18)] backdrop-blur";
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  const iconClasses = outline
+    ? "bg-slate-900/5 text-slate-900 border border-slate-900/10"
+    : "bg-white/20 text-white border border-white/20";
 
-    const newRipple = { x, y, id: Date.now() };
-    setRipples([...ripples, newRipple]);
-
-    setTimeout(() => {
-      setRipples((prev) => prev.filter((ripple) => ripple.id !== newRipple.id));
-    }, 600);
-  };
+  const accentLabelClasses = outline
+    ? "text-slate-500"
+    : "text-white/70";
 
   return (
-    <motion.button
-      className={`action-button ${outline ? "outline" : ""}`}
-      onClick={handleClick}
-      whileHover={{ scale: 1.05, y: -2 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    <button
+      className={`${baseClasses} ${outline ? outlineClasses : filledClasses}`}
     >
-      {ripples.map((ripple) => (
-        <span
-          key={ripple.id}
-          className="ripple"
-          style={{
-            left: ripple.x,
-            top: ripple.y,
-          }}
-        />
-      ))}
-
-      <motion.span
-        className="button-icon"
-        whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-        transition={{ duration: 0.5 }}
+      <span
+        className={`flex h-9 w-9 items-center justify-center rounded-full ${iconClasses}`}
+        aria-hidden="true"
       >
         {icon}
-      </motion.span>
-
-      <span className="button-text">{text}</span>
-
-      <motion.span
-        className="button-glow"
-        initial={{ opacity: 0 }}
-        whileHover={{ opacity: 1 }}
-      />
-    </motion.button>
+      </span>
+      <div className="flex flex-col">
+        <span className="text-base leading-tight">{text}</span>
+        <span className={`text-[0.65rem] font-medium uppercase tracking-[0.4em] ${accentLabelClasses}`}>
+          Plan
+        </span>
+      </div>
+    </button>
   );
 }
-
-// Gradients moved to CSS using var(--color-accent)
