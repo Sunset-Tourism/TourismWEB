@@ -21,8 +21,25 @@ let ChatbotController = class ChatbotController {
     constructor(chatbotService) {
         this.chatbotService = chatbotService;
     }
-    getChatbotReply(body) {
+    async getChatbotReply(body) {
         return this.chatbotService.getChatbotReply(body?.message);
+    }
+    async streamChatbotReply(body, res) {
+        const message = body?.message?.trim();
+        if (!message) {
+            res.status(400).json({ reply: 'Message is required.' });
+            return;
+        }
+        res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+        res.setHeader('Cache-Control', 'no-cache, no-transform');
+        res.setHeader('Connection', 'keep-alive');
+        res.setHeader('X-Accel-Buffering', 'no');
+        res.flushHeaders();
+        await this.chatbotService.streamChatbotReply(message, (chunk) => {
+            res.write(`data: ${JSON.stringify({ chunk })}\n\n`);
+        });
+        res.write('data: [DONE]\n\n');
+        res.end();
     }
 };
 exports.ChatbotController = ChatbotController;
@@ -31,8 +48,16 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [chat_request_dto_1.ChatRequestDto]),
-    __metadata("design:returntype", Object)
+    __metadata("design:returntype", Promise)
 ], ChatbotController.prototype, "getChatbotReply", null);
+__decorate([
+    (0, common_1.Post)('stream'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [chat_request_dto_1.ChatRequestDto, Object]),
+    __metadata("design:returntype", Promise)
+], ChatbotController.prototype, "streamChatbotReply", null);
 exports.ChatbotController = ChatbotController = __decorate([
     (0, common_1.Controller)('chatbot'),
     __metadata("design:paramtypes", [chatbot_service_1.ChatbotService])

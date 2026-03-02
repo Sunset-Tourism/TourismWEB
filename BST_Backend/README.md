@@ -46,6 +46,8 @@ cp .env.example .env
 - `NODE_ENV` (example: `production`)
 - `PORT` (example: `4000`)
 - `FRONTEND_URLS` (example: `https://your-frontend-domain`)
+- `GEMINI_API_KEY` (required for AI chatbot responses)
+- `GEMINI_MODEL` (optional, default: `gemini-1.5-flash`)
 
 ### API endpoints used by frontend
 

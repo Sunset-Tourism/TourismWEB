@@ -25,7 +25,14 @@ async function bootstrap() {
         credentials: true,
     });
     app.use((0, helmet_1.default)());
-    app.use((0, compression_1.default)());
+    app.use((0, compression_1.default)({
+        filter: (req, res) => {
+            if (req.originalUrl?.includes('/api/chatbot/stream')) {
+                return false;
+            }
+            return compression_1.default.filter(req, res);
+        },
+    }));
     app.useGlobalPipes(new common_1.ValidationPipe({
         whitelist: true,
         forbidNonWhitelisted: true,
