@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { join } from 'path';
 import { BookingsModule } from './modules/bookings/bookings.module';
 import { ChatbotModule } from './modules/chatbot/chatbot.module';
 import { ExploreModule } from './modules/explore/explore.module';
@@ -9,7 +10,13 @@ import { TransportModule } from './modules/transport/transport.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [
+        join(process.cwd(), '.env'),
+        join(process.cwd(), 'BST_Backend', '.env'),
+      ],
+    }),
     HealthModule,
     BookingsModule,
     HotelsModule,
