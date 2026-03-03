@@ -1,8 +1,15 @@
+import { BookingHelp } from "./components/BookingHelp";
+import { BookingHero } from "./components/BookingHero";
+import { BookingObjectives } from "./components/BookingObjectives";
+import { BookingOptions } from "./components/BookingOptions";
+
 export default function BookingPage() {
   return (
-    <section>
-      <h1>Booking</h1>
-      <p>Choose hotel or transport to continue.</p>
-    </section>
+    <main className="homepage booking-page">
+      <BookingHero />
+      <BookingObjectives />
+      <BookingOptions />
+      <BookingHelp />
+    </main>
   );
 }
