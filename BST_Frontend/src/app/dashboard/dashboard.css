@@ -922,51 +922,6 @@
   font-weight: 500;
 }
 
-/* Reward + Perspective */
-.reward-card {
-  background: linear-gradient(135deg, #fff8ef, #fdf3e4);
-  border-color: rgba(250, 164, 58, 0.35);
-}
-
-.reward-card-description {
-  margin: 0 0 1.25rem;
-  font-weight: 600;
-  color: #a5631b;
-}
-
-.reward-ideas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-}
-
-.reward-idea-card {
-  padding: 1.25rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid rgba(250, 164, 58, 0.25);
-  box-shadow: 0 4px 18px rgba(250, 164, 58, 0.15);
-}
-
-.reward-idea-title {
-  margin: 0 0 0.35rem;
-  font-size: 1rem;
-  font-weight: 800;
-  color: #a5631b;
-}
-
-.reward-idea-points {
-  margin: 0;
-  font-weight: 900;
-  color: #f97316;
-}
-
-.reward-idea-impact {
-  margin: 0.35rem 0 0;
-  font-size: 0.85rem;
-  color: #7a4f1e;
-}
-
 .perspective-card {
   background: linear-gradient(135deg, #f0fffe, #e4f6ff);
   border-color: rgba(82, 171, 152, 0.35);
@@ -1159,17 +1114,7 @@
 
 .journey-insight-photo {
   border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(82, 171, 152, 0.25);
   min-height: 120px;
-  background: rgba(82, 171, 152, 0.08);
-}
-
-.journey-insight-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
 }
 
 .journey-insight-photo-placeholder {
@@ -1189,6 +1134,57 @@
   font-size: 0.7rem;
   font-weight: 600;
   color: #4b6b78;
+}
+
+.journey-insight-photo-dropzone {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  border-radius: 16px;
+  border: 2px dashed rgba(82, 171, 152, 0.35);
+  background: rgba(82, 171, 152, 0.08);
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.journey-insight-photo-dropzone:hover,
+.journey-insight-photo-dropzone:focus-within {
+  border-color: rgba(43, 103, 119, 0.85);
+  box-shadow: 0 0 0 3px rgba(82, 171, 152, 0.16);
+  background: rgba(82, 171, 152, 0.15);
+}
+
+.journey-insight-photo-dropzone.has-image {
+  border-style: solid;
+  border-color: rgba(82, 171, 152, 0.3);
+  background: transparent;
+}
+
+.journey-insight-photo-dropzone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-drop-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.35rem 0.75rem;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7));
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.05em;
 }
 
 @media (max-width: 540px) {
@@ -1549,8 +1545,7 @@
     min-width: 120px;
   }
 
-  .bhutan-progress-grid,
-  .reward-ideas-grid {
+  .bhutan-progress-grid {
     grid-template-columns: 1fr;
   }
 

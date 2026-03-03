@@ -1,13 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  MapPin,
-  Navigation,
-  Award,
-  TrendingUp,
-  Camera,
-} from "lucide-react";
+import type { DragEvent } from "react";
+import { MapPin, Navigation, TrendingUp, Camera } from "lucide-react";
 import "./dashboard.css"; // Import dashboard-specific CSS
 
 type SectionKey = "journey" | "progress";
@@ -30,11 +25,11 @@ type QuickActionConfig = {
 export default function DashboardPage() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedInsight, setSelectedInsight] = useState<number | null>(null);
+  const [photoUploads, setPhotoUploads] = useState<Record<string, string>>({});
   const [userStats] = useState({
     bhutanPlaces: 18,
     bhutanDzongs: 9,
     bhutanDistance: 486,
-    rewardPoints: 2450,
     districtsCovered: 6,
   });
 
@@ -43,7 +38,8 @@ export default function DashboardPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const [highlightedSection, setHighlightedSection] = useState<SectionKey | null>(null);
+  const [highlightedSection, setHighlightedSection] =
+    useState<SectionKey | null>(null);
   const [actionPrompt, setActionPrompt] = useState<ActionPrompt | null>(null);
   const highlightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const journeyLogRef = useRef<HTMLDivElement | null>(null);
@@ -57,7 +53,11 @@ export default function DashboardPage() {
     };
   }, []);
   const mindfulProgress = [
-    { label: "District coverage", current: userStats.districtsCovered, goal: 20 },
+    {
+      label: "District coverage",
+      current: userStats.districtsCovered,
+      goal: 20,
+    },
     { label: "Sacred sites journaled", current: 14, goal: 30 },
     { label: "Nature treks logged", current: 9, goal: 18 },
   ];
@@ -67,6 +67,58 @@ export default function DashboardPage() {
       return `${distanceKm.toLocaleString()} km`;
     }
     return `${distanceKm.toFixed(1)} km`;
+  };
+
+  const buildPhotoKey = (place: string, label: string) => `${place}::${label}`;
+
+  const sanitizeForId = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+
+  const getPhotoInputId = (place: string, label: string) =>
+    `photo-upload-${sanitizeForId(`${place}-${label}`)}`;
+
+  const handlePhotoFiles = (
+    place: string,
+    label: string,
+    files: FileList | null,
+  ) => {
+    if (!files?.length) {
+      return;
+    }
+
+    const [file] = files;
+    if (!file.type.startsWith("image/")) {
+      return;
+    }
+
+    const reader = new FileReader();
+    const photoKey = buildPhotoKey(place, label);
+    reader.onload = () => {
+      setPhotoUploads((prev) => ({
+        ...prev,
+        [photoKey]: reader.result as string,
+      }));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handlePhotoDrop = (
+    event: DragEvent<HTMLLabelElement>,
+    place: string,
+    label: string,
+  ) => {
+    event.preventDefault();
+    handlePhotoFiles(place, label, event.dataTransfer?.files ?? null);
+  };
+
+  const handleDragOver = (event: DragEvent<HTMLLabelElement>) => {
+    event.preventDefault();
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = "copy";
+    }
   };
 
   const bhutanJourney = [
@@ -81,7 +133,6 @@ export default function DashboardPage() {
       insight: {
         bestSeason: "March - May for clear ridgelines",
         essentials: ["Hydration tabs", "Prayer scarf", "Layered fleece"],
-        rewardUse: "Redeem 320 pts for a local porter or mule service at the base camp.",
         community:
           "Donated notebooks to nearby Shari village school—log keeps contact info + follow-ups.",
         photos: [
@@ -101,7 +152,6 @@ export default function DashboardPage() {
       insight: {
         bestSeason: "Oct - Dec for Himalayan vistas",
         essentials: ["Prayer flags", "Wide-angle lens", "Thermal flask"],
-        rewardUse: "Use 600 pts for a tea ceremony + guide inside Punakha Dzong.",
         community:
           "Planted two saplings via Royal Botanical Park volunteer drive; reminders stored in app.",
         photos: [
@@ -121,7 +171,6 @@ export default function DashboardPage() {
       insight: {
         bestSeason: "Nov - Feb when cranes roost",
         essentials: ["Binoculars", "Soft-soled shoes", "Windproof shell"],
-        rewardUse: "Redeem 450 pts for eco-guide from Gangtey Monastery youth group.",
         community:
           "Support Gangtey school canteen—app tracks contribution receipts + next visit dates.",
         photos: [
@@ -140,9 +189,11 @@ export default function DashboardPage() {
         "Linked Kurje, Tamshing, and textile studios into one narrative thread with audio notes.",
       insight: {
         bestSeason: "Sept tshechu festivals",
-        essentials: ["Audio recorder", "Kira fabric samples", "Light rain jacket"],
-        rewardUse:
-          "Apply 1,050 pts toward a farmhouse stay with hot stone bath + local guide.",
+        essentials: [
+          "Audio recorder",
+          "Kira fabric samples",
+          "Light rain jacket",
+        ],
         community:
           "Documented artisans to revisit for custom weaves; contact list synced to dashboard.",
         photos: [
@@ -156,15 +207,18 @@ export default function DashboardPage() {
   const impactHighlights = [
     {
       title: "Community connections",
-      detail: "4 host families logged with contact reminders for return journeys.",
+      detail:
+        "4 host families logged with contact reminders for return journeys.",
     },
     {
       title: "Cultural gifts tracked",
-      detail: "12 butter-lamp offerings + school supplies recorded for future giving.",
+      detail:
+        "12 butter-lamp offerings + school supplies recorded for future giving.",
     },
     {
       title: "Wellness stats",
-      detail: "Avg 11,200 steps/day on treks with rest + acclimatization notes.",
+      detail:
+        "Avg 11,200 steps/day on treks with rest + acclimatization notes.",
     },
   ];
 
@@ -182,14 +236,16 @@ export default function DashboardPage() {
       color: "green",
       icon: <Navigation />,
       section: "progress",
-      prompt: "Bhutan pulse is highlighted so you can append trek and drive totals.",
+      prompt:
+        "Bhutan pulse is highlighted so you can append trek and drive totals.",
     },
     {
       label: "Add photo story",
       color: "purple",
       icon: <Camera />,
       section: "journey",
-      prompt: "Open an insight in the journey log and drop your next photo story.",
+      prompt:
+        "Open an insight in the journey log and drop your next photo story.",
     },
   ];
 
@@ -215,10 +271,10 @@ export default function DashboardPage() {
 
     highlightTimerRef.current = setTimeout(() => {
       setHighlightedSection((current) =>
-        current === action.section ? null : current
+        current === action.section ? null : current,
       );
       setActionPrompt((current) =>
-        current?.section === action.section ? null : current
+        current?.section === action.section ? null : current,
       );
     }, 2600);
   };
@@ -234,8 +290,8 @@ export default function DashboardPage() {
           <div>
             <h1 className="dashboard-title">Bhutan Travel Dashboard</h1>
             <p className="dashboard-subtitle">
-              Everything here is Bhutan-specific—district coverage, dzongs,
-              treks, and the reward wallet I use only within the country.
+              Everything here is Bhutan-specific—district coverage, dzongs, and
+              treks I log only within the country.
             </p>
           </div>
           <div className="dashboard-time">
@@ -267,12 +323,6 @@ export default function DashboardPage() {
           subtitle="Hikes + drives tracked"
           icon={<Navigation className="dashboard-card-icon" />}
         />
-        <UserStatCard
-          title="Reward points"
-          value={userStats.rewardPoints.toLocaleString()}
-          subtitle="Only for Bhutan experiences"
-          icon={<Award className="dashboard-card-icon" />}
-        />
       </div>
 
       {/* Bhutan Progress Snapshot */}
@@ -293,7 +343,7 @@ export default function DashboardPage() {
           {mindfulProgress.map((metric) => {
             const percent = Math.min(
               Math.round((metric.current / metric.goal) * 100),
-              100
+              100,
             );
             return (
               <div key={metric.label} className="bhutan-progress-card">
@@ -329,7 +379,7 @@ export default function DashboardPage() {
           )}
           <p className="journey-log-intro">
             Every entry is a Bhutan story—open an insight to view rituals,
-            essentials, and where reward points were used on the ground.
+            essentials, and on-the-ground logistics.
           </p>
           <div className="journey-log-list">
             {bhutanJourney.map((entry, index) => (
@@ -358,7 +408,6 @@ export default function DashboardPage() {
             ))}
           </div>
         </div>
-
       </div>
 
       <div className="dashboard-activity-grid">
@@ -391,9 +440,6 @@ export default function DashboardPage() {
               Bhutan-only stats + rituals remembered
             </span>
             <span className="perspective-pill">
-              Reward usage stays tied to local partners
-            </span>
-            <span className="perspective-pill">
               Journey insights open as reference before each trip
             </span>
           </div>
@@ -421,7 +467,10 @@ export default function DashboardPage() {
       </div>
 
       {activeInsight && (
-        <div className="journey-insight-overlay" onClick={() => setSelectedInsight(null)}>
+        <div
+          className="journey-insight-overlay"
+          onClick={() => setSelectedInsight(null)}
+        >
           <div
             className="journey-insight-panel"
             onClick={(event) => event.stopPropagation()}
@@ -463,28 +512,71 @@ export default function DashboardPage() {
             {activeInsight.insight.photos &&
               activeInsight.insight.photos.length > 0 && (
                 <div className="journey-insight-photos">
-                  {activeInsight.insight.photos.map((photo) => (
-                    <div key={photo.label} className="journey-insight-photo">
-                      {photo.src ? (
-                        <img src={photo.src} alt={photo.label} />
-                      ) : (
-                        <div className="journey-insight-photo-placeholder">
-                          <Camera size={28} />
-                          <span>{photo.label}</span>
-                          <small>Drop an image URL later</small>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                  {activeInsight.insight.photos.map((photo) => {
+                    const photoKey = buildPhotoKey(
+                      activeInsight.place,
+                      photo.label,
+                    );
+                    const storedImage = photoUploads[photoKey];
+                    const displaySrc = storedImage || photo.src;
+                    const inputId = getPhotoInputId(
+                      activeInsight.place,
+                      photo.label,
+                    );
+
+                    return (
+                      <div key={photo.label} className="journey-insight-photo">
+                        <label
+                          htmlFor={inputId}
+                          className={`journey-insight-photo-dropzone${
+                            displaySrc ? " has-image" : ""
+                          }`}
+                          onDragOver={handleDragOver}
+                          onDrop={(event) =>
+                            handlePhotoDrop(
+                              event,
+                              activeInsight.place,
+                              photo.label,
+                            )
+                          }
+                        >
+                          <input
+                            id={inputId}
+                            type="file"
+                            accept="image/*"
+                            style={{ display: "none" }}
+                            onChange={(event) =>
+                              handlePhotoFiles(
+                                activeInsight.place,
+                                photo.label,
+                                event.target.files,
+                              )
+                            }
+                          />
+                          {displaySrc ? (
+                            <>
+                              <img
+                                src={displaySrc}
+                                alt={`${activeInsight.place} – ${photo.label}`}
+                              />
+                              <span className="photo-drop-hint">
+                                Drop or click to replace
+                              </span>
+                            </>
+                          ) : (
+                            <div className="journey-insight-photo-placeholder">
+                              <Camera size={28} />
+                              <span>{photo.label}</span>
+                              <small>Drop an image or click to upload</small>
+                            </div>
+                          )}
+                        </label>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
 
-            <div className="journey-insight-note">
-              <p className="journey-insight-label">Reward use</p>
-              <p className="journey-insight-value">
-                {activeInsight.insight.rewardUse}
-              </p>
-            </div>
             <div className="journey-insight-note">
               <p className="journey-insight-label">Community follow-up</p>
               <p className="journey-insight-value">
@@ -525,7 +617,12 @@ type UserQuickActionProps = {
   onClick: () => void;
 };
 
-function UserQuickAction({ icon, label, color, onClick }: UserQuickActionProps) {
+function UserQuickAction({
+  icon,
+  label,
+  color,
+  onClick,
+}: UserQuickActionProps) {
   return (
     <button
       className={`dashboard-quick-action-btn dashboard-quick-action-${color}`}
