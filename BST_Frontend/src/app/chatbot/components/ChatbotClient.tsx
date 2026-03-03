@@ -1,56 +1,105 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ChatMessage } from "@/types/chatbot";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
 import { Card } from "@/components/ui/card";
-import { apiPost } from "@/lib/api";
+import { apiPostStream } from "@/lib/api";
 
 export function ChatbotClient() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  function stopStreaming() {
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = null;
+    setLoading(false);
+  }
 
   async function sendMessage(text: string) {
+    if (loading) return;
+
     const userMsg: ChatMessage = { role: "user", content: text };
-    setMessages((prev) => [...prev, userMsg]);
+    const assistantPlaceholder: ChatMessage = { role: "assistant", content: "" };
+    setMessages((prev) => [...prev, userMsg, assistantPlaceholder]);
     setLoading(true);
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
     try {
-      const data = await apiPost<{ reply: string }>("/chatbot", {
-        message: text,
+      await apiPostStream(
+        "/chatbot/stream",
+        { message: text },
+        (chunk) => {
+          setMessages((prev) => {
+            if (prev.length === 0) return prev;
+            const next = [...prev];
+            const lastIndex = next.length - 1;
+            const last = next[lastIndex];
+
+            if (last.role !== "assistant") return next;
+
+            next[lastIndex] = {
+              ...last,
+              content: `${last.content}${chunk}`,
+            };
+            return next;
+          });
+        },
+        controller.signal,
+      );
+
+      setMessages((prev) => {
+        const next = [...prev];
+        const lastIndex = next.length - 1;
+        const last = next[lastIndex];
+
+        if (last?.role === "assistant" && !last.content.trim()) {
+          next[lastIndex] = {
+            ...last,
+            content: "I could not generate a response right now. Please try again.",
+          };
+        }
+        return next;
       });
-      const botMsg: ChatMessage = { role: "assistant", content: data.reply };
-      setMessages((prev) => [...prev, botMsg]);
-    } catch {
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        return;
+      }
+
       const errMsg: ChatMessage = {
         role: "assistant",
         content: "Sorry, I couldn't respond. Please try again.",
       };
-      setMessages((prev) => [...prev, errMsg]);
+      setMessages((prev) => {
+        const next = [...prev];
+        const lastIndex = next.length - 1;
+        const last = next[lastIndex];
+
+        if (last?.role === "assistant" && !last.content.trim()) {
+          next[lastIndex] = errMsg;
+          return next;
+        }
+
+        return [...prev, errMsg];
+      });
     } finally {
+      abortControllerRef.current = null;
       setLoading(false);
     }
   }
 
   return (
-    <div className="flex h-full flex-col gap-4">
-      <Card className="flex h-[520px] flex-col overflow-hidden border-[#e5e7eb] bg-[#f2f2f2] p-4 shadow-lg">
-        <div className="mb-3 flex items-center justify-between">
-          <h1 className="text-xl font-bold text-[#2b6777]">Travel Chatbot</h1>
-          <span className="text-xs font-medium text-[#2b6777]/60">
-            Bhutan Guide AI
-          </span>
-        </div>
-        <div className="flex-1 overflow-y-auto pr-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-[#2b6777]/25">
+    <div className="flex h-[calc(100vh-13.5rem)] min-h-[460px] flex-col overflow-hidden">
+      <Card className="flex h-full min-h-0 flex-col overflow-hidden rounded-3xl bg-[var(--color-bg-secondary)] p-4 shadow-sm md:p-6">
+        <div className="min-h-0 flex-1 overflow-y-auto pr-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary/25">
           <ChatMessages messages={messages} loading={loading} />
         </div>
-        <div className="mt-4">
-          <ChatInput onSend={sendMessage} disabled={loading} />
+        <div className="mt-5 pt-4">
+          <ChatInput onSend={sendMessage} onStop={stopStreaming} disabled={loading} />
         </div>
       </Card>
-      <p className="text-center text-xs text-[#2b6777]/60">
-        Responses are informational. Verify important travel details with
-        official sources.
-      </p>
     </div>
   );
 }

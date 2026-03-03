@@ -48,7 +48,7 @@ export default function RecommendedHotels() {
               <div className="view-more-desc">
                 Find more stays and book your perfect trip.
               </div>
-              <button className="hotel-btn">Go to Booking</button>
+              <span className="hotel-btn">Go to Booking</span>
             </Link>
           ) : (
             <div className="home-card-hotel" key={i}>
@@ -64,10 +64,12 @@ export default function RecommendedHotels() {
               </div>
               <div className="hotel-card-title">{hotel.title}</div>
               <div className="hotel-card-btn-row">
-                <button className="hotel-btn">More Details</button>
+                <Link href="/booking/hotel" className="hotel-btn">
+                  More Details
+                </Link>
               </div>
             </div>
-          )
+          ),
         )}
       </div>
     </section>
