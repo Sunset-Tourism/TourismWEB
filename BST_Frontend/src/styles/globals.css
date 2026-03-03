@@ -1955,6 +1955,7 @@ h6,
 }
 
 .stories-card__image-wrapper {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-top-left-radius: 1rem;
